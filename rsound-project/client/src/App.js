@@ -40,7 +40,7 @@ class App extends Component {
         <NavBar setTheUser={this.setTheUser} loggedInUser={this.state.loggedInUser} />
         <Switch>
           <Route exact path="/" render={() => <ProjectsList loggedInUser={this.state.loggedInUser} />} />
-          <Route path="/detalles/:id" render={props => <ProjectDetails {...props} />} />
+          <Route path="/details/:id" render={props => <ProjectDetails {...props} />} />
           <Route path="/signup" render={() => <Signup setTheUser={this.setTheUser} />} />
           <Route path="/login" render={props => <Login setTheUser={this.setTheUser} {...props} />} />
           <Route path="/profile" render={() => this.state.loggedInUser ? <Profile loggedInUser={this.state.loggedInUser} /> : <Redirect to="/" />} />

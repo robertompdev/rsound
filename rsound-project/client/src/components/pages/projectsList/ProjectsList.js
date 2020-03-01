@@ -57,7 +57,7 @@ class ProjectsList extends Component {
 
                 <Modal show={this.state.showmodal} onHide={this.closeModal}>
                     <Modal.Body>
-                        <h3>New project</h3>
+                        <h3 className="orange-text">New project</h3>
                         <hr></hr>
                         <ProjectForm closeModal={this.closeModal} refreshList={this.getAllProjects} />
                     </Modal.Body>

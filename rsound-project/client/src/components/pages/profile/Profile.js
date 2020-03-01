@@ -5,16 +5,18 @@ import Row from 'react-bootstrap/Row'
 import Card from 'react-bootstrap/Card'
 import Container from 'react-bootstrap/Container'
 
+import './Profile.css'
+
 const Profile = props => {
     return (
         <>
-            <Container>
+            <Container >
                 <Row className="justify-content-md-center">
                     <h2><span className='user-name'>{props.loggedInUser.username}</span> you're in your profile page. Have fun!</h2>
                 </Row>
                 <Row className="justify-content-md-center">
-                    <Col md={4}>
-                        <Card className="propfile">
+                    <Col md={6}>
+                        <Card className="profile">
                             <Card.Img variant="top" src={props.loggedInUser.imageUrl} />
                             <Card.Body>
                                 <Card.Title>{props.loggedInUser.username}</Card.Title>
