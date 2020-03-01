@@ -38,18 +38,22 @@ class ProjectsList extends Component {
             <Container>
 
                 <h1>Projects</h1>
+                <div className="Row">
+                    {this.props.loggedInUser && <Button className="mb-20" variant="dark" onClick={this.openModal}>Create project</Button>}
+                </div>
+                <div className="Row">
+                    {this.state.projects.length ? (
+                        <Row>
+                            {this.state.projects.map(elm => <ProjectCard key={elm._id} {...elm} />)}
+                        </Row>
+                    )
+                        :
+                        <div class="loading">
+                            <div class="spinner-border"></div>
+                        </div>
 
-                {this.props.loggedInUser && <Button className="mb-20" variant="dark" onClick={this.openModal}>Create project</Button>}
-
-                {this.state.projects.length ? (
-                    <Row>
-                        {this.state.projects.map(elm => <ProjectCard key={elm._id} {...elm} />)}
-                    </Row>
-                )
-                    :
-                    <p>LOADING...</p>
-
-                }
+                    }
+                </div>
 
                 <Modal show={this.state.showmodal} onHide={this.closeModal}>
                     <Modal.Body>

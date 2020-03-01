@@ -43,6 +43,28 @@ a, a:hover {
   color: #FAF9F9;
 }
 
+.btn:hoover{
+  background-color: #F16B24;
+  border: 1px solid #F16B24;
+}
+
 small .nav-link{
-  color: #FAF9F9;
+  color: #F16B24;
+}
+
+.loading{
+  text-align: center;
+}
+.spinner-border {
+  color: #F16B24;
+  left: 0px;
+  top: 0px;
+}
+
+.auth-div {
+  text-align: center;
+}
+
+.user-name{
+  color: #F16B24;
 }

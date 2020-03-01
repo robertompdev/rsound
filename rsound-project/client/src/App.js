@@ -19,7 +19,7 @@ class App extends Component {
 
   constructor() {
     super()
-    this.state = { loggedInUser: true }
+    this.state = { loggedInUser: false }
     this.services = new AuthServices()
   }
 

@@ -53,7 +53,7 @@ class ProjectForm extends Component {
             .then(response => {
                 console.log('Subida de archivo finalizada! La URL de Cloudinray es: ', response.secure_url)
                 this.setState({
-                    coaster: { ...this.state.coaster, imageUrl: response.secure_url }
+                    project: { ...this.state.project, imageUrl: response.secure_url }
                 })
             })
             .catch(err => console.log(err))
