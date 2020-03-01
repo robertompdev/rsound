@@ -15,12 +15,16 @@ const Profile = props => {
                     <h2><span className='user-name'>{props.loggedInUser.username}</span> you're in your profile page. Have fun!</h2>
                 </Row>
                 <Row className="justify-content-md-center">
-                    <Col md={6}>
+                    <Col md={8}>
                         <Card className="profile">
-                            <Card.Img variant="top" src={props.loggedInUser.imageUrl} />
                             <Card.Body>
-                                <Card.Title>{props.loggedInUser.username}</Card.Title>
-                                <hr></hr>
+                                <Col md={4}>
+                                    {props.loggedInUser.imageUrl ? <Card.Img variant="top" src={props.loggedInUser.imageUrl} /> : <div className="initial-letter">{props.loggedInUser.username.charAt(0)}</div>}
+                                    {/* <Card.Title>{props.loggedInUser.username}</Card.Title> */}
+                                </Col>
+                                <Col md={8} className="user-projects">
+
+                                </Col>
                             </Card.Body>
                         </Card>
                     </Col>
