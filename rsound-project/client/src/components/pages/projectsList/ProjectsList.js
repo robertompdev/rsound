@@ -48,8 +48,8 @@ class ProjectsList extends Component {
                         </Row>
                     )
                         :
-                        <div class="loading">
-                            <div class="spinner-border"></div>
+                        <div className="loading">
+                            <div className="spinner-border"></div>
                         </div>
 
                     }

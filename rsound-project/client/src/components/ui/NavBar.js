@@ -30,7 +30,7 @@ class Navigation extends Component {
         return (
 
             <Navbar className="navbar" expand="lg">
-                <Navbar.Brand href="/">rSound</Navbar.Brand>
+                <div className="logo-div"><Navbar.Brand href="/">rSound</Navbar.Brand></div>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ml-auto">
