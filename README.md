@@ -19,3 +19,7 @@ Ironhack individual final project.
 | POST                  | /upload               | Upload files          |
 | GET                   | /details/:id          | Get project details   |
 | POST                  | /new/:id              | Create new project    |
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes

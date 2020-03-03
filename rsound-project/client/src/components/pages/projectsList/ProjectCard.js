@@ -17,7 +17,7 @@ const ProjectCard = ({ title, imageUrl, _id }) => {
                     <Card.Title>{title}</Card.Title>
                     <hr></hr>
                     <Button as="div" variant="dark" size="sm">
-                        <Link to={`/detalles/${_id}`}>Details</Link>
+                        <Link to={`/details/${_id}`}>Details</Link>
                     </Button>
                 </Card.Body>
             </Card>

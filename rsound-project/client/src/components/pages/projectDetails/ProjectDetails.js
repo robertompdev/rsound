@@ -10,15 +10,15 @@ class ProjectDetails extends Component {
 
     constructor(props) {
         super(props)
-        this.state = { projectr: {} }
+        this.state = { project: {} }
         this.services = new ProjectServices()
 
         console.log('las props por defecto serían estas:', this.props)
     }
 
-    componentDidMount = () => this.getProjectDetails()
+    componentDidMount = () => this.getProjectsDetails()
 
-    getProjectDetails = () => {
+    getProjectsDetails = () => {
         this.services.getProjectDetails(this.props.match.params.id)
             .then(theProject => this.setState({ project: theProject }))
             .catch(err => console.log(err))

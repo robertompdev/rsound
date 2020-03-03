@@ -1,10 +1,10 @@
 const express = require('express')
 const router = express.Router()
 
-const Coaster = require('../models/Project.model')
+const Project = require('../models/Project.model')
 
 router.get('/getAllProjects', (req, res, next) => {
-    Coaster.find()
+    Project.find()
         .then(allProjects => res.json(allProjects))
         .catch(err => console.log(err))
 })
