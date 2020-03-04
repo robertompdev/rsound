@@ -4,7 +4,13 @@ import Button from 'react-bootstrap/Button'
 import Dropdown from 'react-bootstrap/Dropdown'
 import Table from 'react-bootstrap/Table'
 
+import octavesJson from '../../data/notes.json'
+
+
+import MatrixSteps from './MatrixStepsCreation'
+
 import './Synth.css'
+
 
 class Synth extends Component {
 
@@ -17,10 +23,12 @@ class Synth extends Component {
             release: 0.15,
             wave: 'sawtooth',
             bpm: 140,
-            sequence: []
-
+            sequence: [],
+            octaves: octavesJson,
+            matrix: []
         }
     }
+
 
     playSeq() {
         let i = 0;
@@ -60,22 +68,25 @@ class Synth extends Component {
         });
     }
 
+
     matrixCellOnClick(e) {
-        e = e || window.event
-        e = e.target || e.srcElement
-        if (e.nodeName === 'TD') {
-            let restOfKeys = document.getElementsByClassName(e.className)
-            let newSequence = [...this.state.sequence]
 
-            for (let i = 0; i < restOfKeys.length; i++) { restOfKeys[i].style.backgroundColor = "transparent" }
+        alert("YAYAYAY")
+        // e = e || window.event
+        // e = e.target || e.srcElement
+        // if (e.nodeName === 'TD') {
+        //     let restOfKeys = document.getElementsByClassName(e.className)
+        //     let newSequence = [...this.state.sequence]
 
-            document.getElementById(e.id).style.background = "#F16B24"
-            newSequence[parseInt(e.id.substring(e.id.length - 2))] = e.id.substring(0, e.id.length - 3)
+        //     for (let i = 0; i < restOfKeys.length; i++) { restOfKeys[i].style.backgroundColor = "transparent" }
 
-            this.setState({ sequence: newSequence })
+        //     document.getElementById(e.id).style.background = "#F16B24"
+        //     newSequence[parseInt(e.id.substring(e.id.length - 2))] = e.id.substring(0, e.id.length - 3)
 
-            console.log(newSequence)
-        }
+        //     this.setState({ sequence: newSequence })
+
+        //     console.log(newSequence)
+        // }
     }
 
     render() {
@@ -100,7 +111,6 @@ class Synth extends Component {
                     <Table striped bordered hover size="sm">
                         <thead>
                             <tr>
-                                <th>Note</th>
                                 <th>1</th>
                                 <th>2</th>
                                 <th>3</th>
@@ -120,27 +130,13 @@ class Synth extends Component {
                             </tr>
                         </thead>
                         <tbody>
+
+                            <MatrixSteps matrixCellOnClick={this.matrixCellOnClick} />
+
                             {/* Octava 1 */}
-                            <tr className="octave-one">
-                                <td>C1</td>
-                                <td id="C1-00" className="00" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="C1-01" className="01" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="C1-02" className="02" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="C1-03" className="03" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="C1-04" className="04" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="C1-05" className="05" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="C1-06" className="06" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="C1-07" className="07" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="C1-08" className="08" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="C1-09" className="09" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="C1-10" className="10" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="C1-11" className="11" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="C1-12" className="12" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="C1-13" className="13" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="C1-14" className="14" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="C1-15" className="15" onClick={() => this.matrixCellOnClick()}></td>
-                            </tr>
-                            <tr>
+
+
+                            {/* <tr>
                                 <td>C#1</td>
                                 <td id="C#1-00" className="00" onClick={() => this.matrixCellOnClick()}></td>
                                 <td id="C#1-01" className="01" onClick={() => this.matrixCellOnClick()}></td>
@@ -332,519 +328,519 @@ class Synth extends Component {
                             </tr>
                             <tr>
                                 <td>B1</td>
-                                <td id="B1-00" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="B1-01" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="B1-02" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="B1-03" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="B1-04" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="B1-05" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="B1-06" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="B1-07" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="B1-08" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="B1-09" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="B1-10" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="B1-11" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="B1-12" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="B1-13" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="B1-14" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="B1-15" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B1-00" className="00" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B1-01" className="01" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B1-02" className="02" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B1-03" className="03" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B1-04" className="04" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B1-05" className="05" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B1-06" className="06" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B1-07" className="07" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B1-08" className="08" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B1-09" className="09" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B1-10" className="10" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B1-11" className="11" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B1-12" className="12" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B1-13" className="13" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B1-14" className="14" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B1-15" className="15" onClick={() => this.matrixCellOnClick()}></td>
                             </tr>
-                            {/* Octava 2 */}
+                            {/* Octava 2 
                             <tr className="octave-two">
                                 <td>C2</td>
-                                <td id="C2-00" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="C2-01" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="C2-02" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="C2-03" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="C2-04" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="C2-05" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="C2-06" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="C2-07" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="C2-08" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="C2-09" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="C2-10" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="C2-11" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="C2-12" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="C2-13" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="C2-14" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="C2-15" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C2-00" className="00" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C2-01" className="01" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C2-02" className="02" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C2-03" className="03" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C2-04" className="04" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C2-05" className="05" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C2-06" className="06" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C2-07" className="07" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C2-08" className="08" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C2-09" className="09" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C2-10" className="10" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C2-11" className="11" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C2-12" className="12" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C2-13" className="13" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C2-14" className="14" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C2-15" className="15" onClick={() => this.matrixCellOnClick()}></td>
                             </tr>
                             <tr>
                                 <td>C#2</td>
-                                <td id="C#2-00" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="C#2-01" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="C#2-02" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="C#2-03" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="C#2-04" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="C#2-05" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="C#2-06" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="C#2-07" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="C#2-08" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="C#2-09" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="C#2-10" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="C#2-11" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="C#2-12" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="C#2-13" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="C#2-14" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="C#2-15" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#2-00" className="00" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#2-01" className="01" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#2-02" className="02" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#2-03" className="03" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#2-04" className="04" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#2-05" className="05" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#2-06" className="06" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#2-07" className="07" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#2-08" className="08" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#2-09" className="09" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#2-10" className="10" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#2-11" className="11" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#2-12" className="12" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#2-13" className="13" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#2-14" className="14" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#2-15" className="15" onClick={() => this.matrixCellOnClick()}></td>
                             </tr>
                             <tr>
                                 <td>D2</td>
-                                <td id="D2-00" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="D2-01" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="D2-02" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="D2-03" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="D2-04" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="D2-05" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="D2-06" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="D2-07" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="D2-08" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="D2-09" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="D2-10" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="D2-11" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="D2-12" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="D2-13" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="D2-14" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="D2-15" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D2-00" className="00" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D2-01" className="01" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D2-02" className="02" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D2-03" className="03" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D2-04" className="04" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D2-05" className="05" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D2-06" className="06" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D2-07" className="07" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D2-08" className="08" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D2-09" className="09" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D2-10" className="10" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D2-11" className="11" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D2-12" className="12" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D2-13" className="13" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D2-14" className="14" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D2-15" className="15" onClick={() => this.matrixCellOnClick()}></td>
                             </tr>
                             <tr>
                                 <td>D#2</td>
-                                <td id="D#2-00" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="D#2-01" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="D#2-02" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="D#2-03" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="D#2-04" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="D#2-05" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="D#2-06" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="D#2-07" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="D#2-08" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="D#2-09" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="D#2-10" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="D#2-11" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="D#2-12" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="D#2-13" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="D#2-14" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="D#2-15" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#2-00" className="00" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#2-01" className="01" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#2-02" className="02" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#2-03" className="03" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#2-04" className="04" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#2-05" className="05" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#2-06" className="06" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#2-07" className="07" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#2-08" className="08" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#2-09" className="09" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#2-10" className="10" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#2-11" className="11" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#2-12" className="12" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#2-13" className="13" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#2-14" className="14" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#2-15" className="15" onClick={() => this.matrixCellOnClick()}></td>
                             </tr>
                             <tr>
                                 <td>E2</td>
-                                <td id="E2-00" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="E2-01" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="E2-02" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="E2-03" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="E2-04" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="E2-05" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="E2-06" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="E2-07" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="E2-08" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="E2-09" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="E2-10" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="E2-11" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="E2-12" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="E2-13" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="E2-14" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="E2-15" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E2-00" className="00" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E2-01" className="01" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E2-02" className="02" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E2-03" className="03" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E2-04" className="04" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E2-05" className="05" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E2-06" className="06" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E2-07" className="07" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E2-08" className="08" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E2-09" className="09" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E2-10" className="10" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E2-11" className="11" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E2-12" className="12" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E2-13" className="13" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E2-14" className="14" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E2-15" className="15" onClick={() => this.matrixCellOnClick()}></td>
                             </tr>
                             <tr>
                                 <td>F2</td>
-                                <td id="F2-00" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="F2-01" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="F2-02" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="F2-03" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="F2-04" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="F2-05" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="F2-06" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="F2-07" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="F2-08" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="F2-09" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="F2-10" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="F2-11" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="F2-12" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="F2-13" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="F2-14" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="F2-15" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F2-00" className="00" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F2-01" className="01" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F2-02" className="02" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F2-03" className="03" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F2-04" className="04" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F2-05" className="05" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F2-06" className="06" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F2-07" className="07" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F2-08" className="08" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F2-09" className="09" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F2-10" className="10" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F2-11" className="11" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F2-12" className="12" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F2-13" className="13" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F2-14" className="14" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F2-15" className="15" onClick={() => this.matrixCellOnClick()}></td>
                             </tr>
                             <tr>
                                 <td>F#2</td>
-                                <td id="F#2-00" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="F#2-01" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="F#2-02" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="F#2-03" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="F#2-04" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="F#2-05" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="F#2-06" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="F#2-07" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="F#2-08" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="F#2-09" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="F#2-10" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="F#2-11" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="F#2-12" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="F#2-13" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="F#2-14" className="" onClick={() => this.matrixCellOnClick()}></td>
-                                <td id="F#2-15" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#2-00" className="00" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#2-01" className="01" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#2-02" className="02" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#2-03" className="03" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#2-04" className="04" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#2-05" className="05" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#2-06" className="06" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#2-07" className="07" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#2-08" className="08" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#2-09" className="09" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#2-10" className="10" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#2-11" className="11" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#2-12" className="12" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#2-13" className="13" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#2-14" className="14" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#2-15" className="15" onClick={() => this.matrixCellOnClick()}></td>
                             </tr>
                             <tr>
                                 <td>G2</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="G2-00" className="00" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G2-01" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G2-02" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G2-03" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G2-04" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G2-05" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G2-06" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G2-07" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G2-08" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G2-09" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G2-10" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G2-11" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G2-12" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G2-13" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G2-14" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G2-15" className="" onClick={() => this.matrixCellOnClick()}></td>
                             </tr>
                             <tr>
                                 <td>G#2</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="G#2-00" className="00" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G#2-01" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G#2-02" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G#2-03" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G#2-04" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G#2-05" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G#2-06" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G#2-07" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G#2-08" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G#2-09" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G#2-10" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G#2-11" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G#2-12" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G#2-13" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G#2-14" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G#2-15" className="" onClick={() => this.matrixCellOnClick()}></td>
                             </tr>
                             <tr>
                                 <td>A2</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="A2-00" className="00" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A2-01" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A2-02" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A2-03" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A2-04" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A2-05" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A2-06" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A2-07" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A2-08" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A2-09" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A2-10" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A2-11" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A2-12" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A2-13" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A2-14" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A2-15" className="" onClick={() => this.matrixCellOnClick()}></td>
                             </tr>
                             <tr>
                                 <td>A#2</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="A#2-00" className="00" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A#2-01" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A#2-02" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A#2-03" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A#2-04" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A#2-05" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A#2-06" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A#2-07" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A#2-08" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A#2-09" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A#2-10" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A#2-11" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A#2-12" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A#2-13" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A#2-14" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A#2-15" className="" onClick={() => this.matrixCellOnClick()}></td>
                             </tr>
                             <tr>
                                 <td>B2</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="B2-00" className="00" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B2-01" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B2-02" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B2-03" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B2-04" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B2-05" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B2-06" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B2-07" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B2-08" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B2-09" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B2-10" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B2-11" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B2-12" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B2-13" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B2-14" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B2-15" className="" onClick={() => this.matrixCellOnClick()}></td>
                             </tr>
-                            {/* Octava 3 */}
+                            {/* Octava 3 
                             <tr className="octave-three">
                                 <td>C3</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="C3-00" className="00" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C3-01" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C3-02" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C3-03" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C3-04" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C3-05" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C3-06" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C3-07" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C3-08" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C3-09" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C3-10" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C3-11" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C3-12" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C3-13" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C3-14" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C3-15" className="" onClick={() => this.matrixCellOnClick()}></td>
                             </tr>
                             <tr>
                                 <td>C#3</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="C#3-00" className="00" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#3-01" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#3-02" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#3-03" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#3-04" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#3-05" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#3-06" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#3-07" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#3-08" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#3-09" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#3-10" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#3-11" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#3-12" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#3-13" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#3-14" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#3-15" className="" onClick={() => this.matrixCellOnClick()}></td>
                             </tr>
                             <tr>
                                 <td>D3</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="D3-00" className="00" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D3-01" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D3-02" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D3-03" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D3-04" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D3-05" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D3-06" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D3-07" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D3-08" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D3-09" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D3-10" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D3-11" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D3-12" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D3-13" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D3-14" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D3-15" className="" onClick={() => this.matrixCellOnClick()}></td>
                             </tr>
                             <tr>
                                 <td>D#3</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="D#3-00" className="00" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#3-01" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#3-02" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#3-03" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#3-04" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#3-05" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#3-06" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#3-07" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#3-08" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#3-09" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#3-10" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#3-11" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#3-12" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#3-13" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#3-14" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#3-15" className="" onClick={() => this.matrixCellOnClick()}></td>
                             </tr>
                             <tr>
                                 <td>E3</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="E3-00" className="00" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E3-01" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E3-02" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E3-03" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E3-04" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E3-05" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E3-06" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E3-07" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E3-08" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E3-09" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E3-10" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E3-11" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E3-12" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E3-13" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E3-14" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E3-15" className="" onClick={() => this.matrixCellOnClick()}></td>
                             </tr>
                             <tr>
                                 <td>F3</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="F3-00" className="00" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F3-01" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F3-02" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F3-03" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F3-04" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F3-05" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F3-06" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F3-07" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F3-08" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F3-09" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F3-10" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F3-11" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F3-12" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F3-13" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F3-14" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F3-15" className="" onClick={() => this.matrixCellOnClick()}></td>
                             </tr>
                             <tr>
                                 <td>F#3</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="F#3-00" className="00" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#3-01" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#3-02" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#3-03" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#3-04" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#3-05" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#3-06" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#3-07" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#3-08" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#3-09" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#3-10" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#3-11" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#3-12" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#3-13" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#3-14" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#3-15" className="" onClick={() => this.matrixCellOnClick()}></td>
                             </tr>
                             <tr>
                                 <td>G3</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="G3-00" className="00" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G3-01" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G3-02" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G3-03" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G3-04" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G3-05" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G3-06" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G3-07" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G3-08" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G3-09" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G3-10" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G3-11" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G3-12" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G3-13" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G3-14" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G3-15" className="" onClick={() => this.matrixCellOnClick()}></td>
                             </tr>
                             <tr>
                                 <td>G#3</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="G#3-00" className="00" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G#3-01" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G#3-02" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G#3-03" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G#3-04" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G#3-05" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G#3-06" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G#3-07" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G#3-08" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G#3-09" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G#3-10" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G#3-11" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G#3-12" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G#3-13" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G#3-14" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G#3-15" className="" onClick={() => this.matrixCellOnClick()}></td>
                             </tr>
                             <tr>
                                 <td>A3</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="A3-00" className="00" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A3-01" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A3-02" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A3-03" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A3-04" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A3-05" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A3-06" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A3-07" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A3-08" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A3-09" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A3-10" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A3-11" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A3-12" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A3-13" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A3-14" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A3-15" className="" onClick={() => this.matrixCellOnClick()}></td>
                             </tr>
                             <tr>
                                 <td>A#3</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="A#3-00" className="00" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A#3-01" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A#3-02" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A#3-03" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A#3-04" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A#3-05" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A#3-06" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A#3-07" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A#3-08" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A#3-09" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A#3-10" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A#3-11" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A#3-12" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A#3-13" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A#3-14" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A#3-15" className="" onClick={() => this.matrixCellOnClick()}></td>
                             </tr>
                             <tr>
                                 <td>B3</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="B3-00" className="00" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B3-01" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B3-02" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B3-03" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B3-04" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B3-05" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B3-06" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B3-07" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B3-08" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B3-09" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B3-10" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B3-11" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B3-12" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B3-13" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B3-14" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B3-15" className="" onClick={() => this.matrixCellOnClick()}></td>
                             </tr>
-                            {/* Octava 4 */}
+                            {/* Octava 4 
                             <tr className="octave-four">
                                 <td>C4</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="C4-00" className="00" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C4-01" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C4-02" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C4-03" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C4-04" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C4-05" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C4-06" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C4-07" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C4-08" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C4-09" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C4-10" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C4-11" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C4-12" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C4-13" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C4-14" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C4-15" className="" onClick={() => this.matrixCellOnClick()}></td>
                             </tr>
                             <tr>
                                 <td>C#4</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="C#4-00" className="00" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#4-01" className="01" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#4-02" className="02" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#4-03" className="03" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#4-04" className="04" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#4-05" className="05" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#4-06" className="06" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#4-07" className="07" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#4-08" className="08" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#4-09" className="09" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#4-10" className="10" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#4-11" className="11" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#4-12" className="12" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#4-13" className="13" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#4-14" className="14" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#4-15" className="15" onClick={() => this.matrixCellOnClick()}></td>
                             </tr>
                             <tr>
                                 <td>D4</td>
@@ -1036,7 +1032,7 @@ class Synth extends Component {
                                 <td></td>
                                 <td></td>
                             </tr>
-                            {/* Octava 5 */}
+                            {/* Octava 5 
                             <tr className="octave-five">
                                 <td>C5</td>
                                 <td></td>
@@ -1265,7 +1261,7 @@ class Synth extends Component {
                                 <td></td>
                                 <td></td>
                             </tr>
-                            {/* Octava 6 */}
+                            {/* Octava 6 
                             <tr className="octave-six">
                                 <td>C6</td>
                                 <td></td>
@@ -1493,7 +1489,7 @@ class Synth extends Component {
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                            </tr>
+                            </tr> */}
                         </tbody>
                     </Table>
                 </div>
@@ -1502,7 +1498,7 @@ class Synth extends Component {
 
 
 
-
+                {/* CONTROLES ADSR */}
                 <hr />
                 <p>Attack {Number.parseInt(this.state.attack * 100)}</p>
                 <input name="attack" className="attack-slider" type="range" min="0" max="1" step="0.01" value={this.state.attack}
@@ -1516,97 +1512,50 @@ class Synth extends Component {
                 <p>Release {this.state.release * 10}</p>
                 <input name="release" className="release-slider" type="range" min="0" max="1" step="0.01" value={this.state.release}
                     onChange={this.onChange} />
+
+                {/* MAPPING DE JSON PARA GENERAR TECLAS */}
                 <hr />
-                <Button variant="light" type="submit" onClick={() => this.startOsc(32.70)}>C1</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(34.65)}>C#1</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(36.71)}>D1</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(38.89)}>D#1</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(41.20)}>E1</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(43.65)}>F1</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(46.25)}>F#1</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(49.00)}>G1</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(51.91)}>G#1</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(55.00)}>A1</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(58.27)}>A#1</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(61.74)}>B1</Button>
+                {
+                    this.state.octaves.octaves.one.map((note, index) => (
+                        <Button variant="light" type="submit" onClick={() => this.startOsc(note.frequency)} key={index}>{note.note}1</Button>
+                    ))
+                }
                 <hr />
-                <Button variant="light" type="submit" onClick={() => this.startOsc(65.41)}>C2</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(69.30)}>C#2</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(73.42)}>D2</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(77.78)}>D#2</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(82.41)}>E2</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(87.31)}>F2</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(92.50)}>F#2</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(98.00)}>G2</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(103.83)}>G#2</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(110.00)}>A2</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(116.54)}>A#2</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(123.47)}>B2</Button>
+                {
+                    this.state.octaves.octaves.two.map((note, index) => (
+                        <Button variant="light" type="submit" onClick={() => this.startOsc(note.frequency)} key={index}>{note.note}2</Button>
+                    ))
+                }
                 <hr />
-                <Button variant="light" type="submit" onClick={() => this.startOsc(130.81)}>C3</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(138.59)}>C#3</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(146.83)}>D3</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(155.56)}>D#3</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(164.81)}>E3</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(174.61)}>F3</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(185.00)}>F#3</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(196.00)}>G3</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(207.65)}>G#3</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(220.00)}>A3</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(233.08)}>A#3</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(246.94)}>B3</Button>
+                {
+                    this.state.octaves.octaves.three.map((note, index) => (
+                        <Button variant="light" type="submit" onClick={() => this.startOsc(note.frequency)} key={index}>{note.note}3</Button>
+                    ))
+                }
                 <hr />
-                <Button variant="light" type="submit" onClick={() => this.startOsc(261.63)}>C4</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(277.18)}>C#4</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(293.66)}>D4</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(311.13)}>D#4</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(329.63)}>E4</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(349.23)}>F4</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(369.99)}>F#4</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(392.00)}>G4</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(415.30)}>G#4</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(440.00)}>A4</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(466.16)}>A#4</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(493.88)}>B4</Button>
+                {
+                    this.state.octaves.octaves.four.map((note, index) => (
+                        <Button variant="light" type="submit" onClick={() => this.startOsc(note.frequency)} key={index}>{note.note}4</Button>
+                    ))
+                }
                 <hr />
-                <Button variant="light" type="submit" onClick={() => this.startOsc(523.25)}>C5</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(554.37)}>C#5</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(587.33)}>D5</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(622.25)}>D#5</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(659.25)}>E5</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(698.46)}>F5</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(739.99)}>F#5</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(783.99)}>G5</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(830.61)}>G#5</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(880.00)}>A5</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(932.33)}>A#5</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(987.77)}>B5</Button>
+                {
+                    this.state.octaves.octaves.five.map((note, index) => (
+                        <Button variant="light" type="submit" onClick={() => this.startOsc(note.frequency)} key={index}>{note.note}5</Button>
+                    ))
+                }
                 <hr />
-                <Button variant="light" type="submit" onClick={() => this.startOsc(1046.50)}>C6</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(1108.73)}>C#6</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(1174.66)}>D6</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(1244.51)}>D#6</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(1318.51)}>E6</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(1396.91)}>F6</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(1479.98)}>F#6</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(1567.98)}>G6</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(1661.22)}>G#6</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(1760.00)}>A6</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(1864.66)}>A#6</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(1975.53)}>B6</Button>
+                {
+                    this.state.octaves.octaves.six.map((note, index) => (
+                        <Button variant="light" type="submit" onClick={() => this.startOsc(note.frequency)} key={index}>{note.note}6</Button>
+                    ))
+                }
                 <hr />
-                <Button variant="light" type="submit" onClick={() => this.startOsc(2093.00)}>C7</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(2217.46)}>C#7</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(2349.32)}>D7</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(2489.02)}>D#7</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(2637.02)}>E7</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(2793.83)}>F7</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(2959.96)}>F#7</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(3135.96)}>G7</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(3520.00)}>G#7</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(3520.00)}>A7</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(3729.31)}>A#7</Button>
-                <Button variant="light" type="submit" onClick={() => this.startOsc(3951.07)}>B7</Button>
+                {
+                    this.state.octaves.octaves.seven.map((note, index) => (
+                        <Button variant="light" type="submit" onClick={() => this.startOsc(note.frequency)} key={index}>{note.note}7</Button>
+                    ))
+                }
                 <hr />
             </>
         )
