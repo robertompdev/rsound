@@ -33,10 +33,8 @@ class ProjectsList extends Component {
     openModal = () => this.setState({ showmodal: true })
 
     render() {
-
         return (
             <Container>
-
                 <h1>Projects</h1>
                 <div className="Row">
                     {this.props.loggedInUser && <Button className="mb-20" variant="dark" onClick={this.openModal}>Create project</Button>}
@@ -51,10 +49,8 @@ class ProjectsList extends Component {
                         <div className="loading">
                             <div className="spinner-border"></div>
                         </div>
-
                     }
                 </div>
-
                 <Modal show={this.state.showmodal} onHide={this.closeModal}>
                     <Modal.Body>
                         <h3 className="orange-text">New project</h3>

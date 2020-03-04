@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 
 import Button from 'react-bootstrap/Button'
 import Dropdown from 'react-bootstrap/Dropdown'
+import Table from 'react-bootstrap/Table'
+
+import './Synth.css'
 
 class Synth extends Component {
 
@@ -14,7 +17,8 @@ class Synth extends Component {
             release: 0.15,
             wave: 'sawtooth',
             bpm: 140,
-            sequence: [65.41, 65.41, 130.81, 130.81]
+            sequence: []
+
         }
     }
 
@@ -56,6 +60,24 @@ class Synth extends Component {
         });
     }
 
+    matrixCellOnClick(e) {
+        e = e || window.event
+        e = e.target || e.srcElement
+        if (e.nodeName === 'TD') {
+            let restOfKeys = document.getElementsByClassName(e.className)
+            let newSequence = [...this.state.sequence]
+
+            for (let i = 0; i < restOfKeys.length; i++) { restOfKeys[i].style.backgroundColor = "transparent" }
+
+            document.getElementById(e.id).style.background = "#F16B24"
+            newSequence[parseInt(e.id.substring(e.id.length - 2))] = e.id.substring(0, e.id.length - 3)
+
+            this.setState({ sequence: newSequence })
+
+            console.log(newSequence)
+        }
+    }
+
     render() {
         return (
             <>
@@ -72,20 +94,1423 @@ class Synth extends Component {
                     </Dropdown.Menu>
                 </Dropdown>
                 <hr />
-
                 <p>Pattern Sequencer</p>
+                <Button variant="light" type="submit" onClick={() => this.playSeq()} >Play Pattern</Button>
+                <div className="div-seq">
+                    <Table striped bordered hover size="sm">
+                        <thead>
+                            <tr>
+                                <th>Note</th>
+                                <th>1</th>
+                                <th>2</th>
+                                <th>3</th>
+                                <th>4</th>
+                                <th>5</th>
+                                <th>6</th>
+                                <th>7</th>
+                                <th>8</th>
+                                <th>9</th>
+                                <th>10</th>
+                                <th>11</th>
+                                <th>12</th>
+                                <th>13</th>
+                                <th>14</th>
+                                <th>15</th>
+                                <th>16</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {/* Octava 1 */}
+                            <tr className="octave-one">
+                                <td>C1</td>
+                                <td id="C1-00" className="00" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C1-01" className="01" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C1-02" className="02" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C1-03" className="03" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C1-04" className="04" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C1-05" className="05" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C1-06" className="06" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C1-07" className="07" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C1-08" className="08" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C1-09" className="09" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C1-10" className="10" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C1-11" className="11" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C1-12" className="12" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C1-13" className="13" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C1-14" className="14" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C1-15" className="15" onClick={() => this.matrixCellOnClick()}></td>
+                            </tr>
+                            <tr>
+                                <td>C#1</td>
+                                <td id="C#1-00" className="00" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#1-01" className="01" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#1-02" className="02" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#1-03" className="03" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#1-04" className="04" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#1-05" className="05" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#1-06" className="06" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#1-07" className="07" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#1-08" className="08" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#1-09" className="09" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#1-10" className="10" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#1-11" className="11" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#1-12" className="12" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#1-13" className="13" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#1-14" className="14" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#1-15" className="15" onClick={() => this.matrixCellOnClick()}></td>
+                            </tr>
+                            <tr>
+                                <td>D1</td>
+                                <td id="D1-00" className="00" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D1-01" className="01" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D1-02" className="02" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D1-03" className="03" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D1-04" className="04" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D1-05" className="05" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D1-06" className="06" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D1-07" className="07" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D1-08" className="08" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D1-09" className="09" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D1-10" className="10" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D1-11" className="11" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D1-12" className="12" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D1-13" className="13" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D1-14" className="14" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D1-15" className="15" onClick={() => this.matrixCellOnClick()}></td>
+                            </tr>
+                            <tr>
+                                <td>D#1</td>
+                                <td id="D#1-00" className="00" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#1-01" className="01" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#1-02" className="02" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#1-03" className="03" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#1-04" className="04" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#1-05" className="05" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#1-06" className="06" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#1-07" className="07" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#1-08" className="08" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#1-09" className="09" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#1-10" className="10" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#1-11" className="11" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#1-12" className="12" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#1-13" className="13" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#1-14" className="14" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#1-15" className="15" onClick={() => this.matrixCellOnClick()}></td>
+                            </tr>
+                            <tr>
+                                <td>E1</td>
+                                <td id="E1-00" className="00" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E1-01" className="01" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E1-02" className="02" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E1-03" className="03" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E1-04" className="04" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E1-05" className="05" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E1-06" className="06" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E1-07" className="07" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E1-08" className="08" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E1-09" className="09" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E1-10" className="10" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E1-11" className="11" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E1-12" className="12" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E1-13" className="13" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E1-14" className="14" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E1-15" className="15" onClick={() => this.matrixCellOnClick()}></td>
+                            </tr>
+                            <tr>
+                                <td>F1</td>
+                                <td id="F1-00" className="00" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F1-01" className="01" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F1-02" className="02" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F1-03" className="03" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F1-04" className="04" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F1-05" className="05" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F1-06" className="06" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F1-07" className="07" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F1-08" className="08" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F1-09" className="09" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F1-10" className="10" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F1-11" className="11" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F1-12" className="12" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F1-13" className="13" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F1-14" className="14" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F1-15" className="15" onClick={() => this.matrixCellOnClick()}></td>
+                            </tr>
+                            <tr>
+                                <td>F#1</td>
+                                <td id="F#1-00" className="00" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#1-01" className="01" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#1-02" className="02" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#1-03" className="03" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#1-04" className="04" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#1-05" className="05" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#1-06" className="06" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#1-07" className="07" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#1-08" className="08" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#1-09" className="09" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#1-10" className="10" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#1-11" className="11" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#1-12" className="12" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#1-13" className="13" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#1-14" className="14" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#1-15" className="15" onClick={() => this.matrixCellOnClick()}></td>
+                            </tr>
+                            <tr>
+                                <td>G1</td>
+                                <td id="G1-00" className="00" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G1-01" className="01" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G1-02" className="02" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G1-03" className="03" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G1-04" className="04" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G1-05" className="05" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G1-06" className="06" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G1-07" className="07" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G1-08" className="08" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G1-09" className="09" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G1-10" className="10" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G1-11" className="11" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G1-12" className="12" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G1-13" className="13" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G1-14" className="14" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G1-15" className="15" onClick={() => this.matrixCellOnClick()}></td>
+                            </tr>
+                            <tr>
+                                <td>G#1</td>
+                                <td id="G#1-00" className="00" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G#1-01" className="01" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G#1-02" className="02" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G#1-03" className="03" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G#1-04" className="04" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G#1-05" className="05" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G#1-06" className="06" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G#1-07" className="07" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G#1-08" className="08" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G#1-09" className="09" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G#1-10" className="10" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G#1-11" className="11" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G#1-12" className="12" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G#1-13" className="13" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G#1-14" className="14" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="G#1-15" className="15" onClick={() => this.matrixCellOnClick()}></td>
+                            </tr>
+                            <tr>
+                                <td>A1</td>
+                                <td id="A1-00" className="00" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A1-01" className="01" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A1-02" className="02" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A1-03" className="03" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A1-04" className="04" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A1-05" className="05" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A1-06" className="06" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A1-07" className="07" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A1-08" className="08" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A1-09" className="09" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A1-10" className="10" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A1-11" className="11" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A1-12" className="12" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A1-13" className="13" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A1-14" className="14" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A1-15" className="15" onClick={() => this.matrixCellOnClick()}></td>
+                            </tr>
+                            <tr>
+                                <td>A#1</td>
+                                <td id="A#1-00" className="00" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A#1-01" className="01" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A#1-02" className="02" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A#1-03" className="03" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A#1-04" className="04" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A#1-05" className="05" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A#1-06" className="06" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A#1-07" className="07" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A#1-08" className="08" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A#1-09" className="09" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A#1-10" className="10" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A#1-11" className="11" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A#1-12" className="12" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A#1-13" className="13" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A#1-14" className="14" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="A#1-15" className="15" onClick={() => this.matrixCellOnClick()}></td>
+                            </tr>
+                            <tr>
+                                <td>B1</td>
+                                <td id="B1-00" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B1-01" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B1-02" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B1-03" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B1-04" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B1-05" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B1-06" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B1-07" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B1-08" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B1-09" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B1-10" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B1-11" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B1-12" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B1-13" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B1-14" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="B1-15" className="" onClick={() => this.matrixCellOnClick()}></td>
+                            </tr>
+                            {/* Octava 2 */}
+                            <tr className="octave-two">
+                                <td>C2</td>
+                                <td id="C2-00" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C2-01" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C2-02" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C2-03" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C2-04" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C2-05" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C2-06" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C2-07" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C2-08" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C2-09" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C2-10" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C2-11" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C2-12" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C2-13" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C2-14" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C2-15" className="" onClick={() => this.matrixCellOnClick()}></td>
+                            </tr>
+                            <tr>
+                                <td>C#2</td>
+                                <td id="C#2-00" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#2-01" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#2-02" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#2-03" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#2-04" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#2-05" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#2-06" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#2-07" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#2-08" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#2-09" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#2-10" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#2-11" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#2-12" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#2-13" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#2-14" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="C#2-15" className="" onClick={() => this.matrixCellOnClick()}></td>
+                            </tr>
+                            <tr>
+                                <td>D2</td>
+                                <td id="D2-00" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D2-01" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D2-02" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D2-03" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D2-04" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D2-05" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D2-06" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D2-07" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D2-08" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D2-09" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D2-10" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D2-11" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D2-12" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D2-13" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D2-14" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D2-15" className="" onClick={() => this.matrixCellOnClick()}></td>
+                            </tr>
+                            <tr>
+                                <td>D#2</td>
+                                <td id="D#2-00" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#2-01" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#2-02" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#2-03" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#2-04" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#2-05" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#2-06" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#2-07" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#2-08" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#2-09" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#2-10" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#2-11" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#2-12" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#2-13" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#2-14" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="D#2-15" className="" onClick={() => this.matrixCellOnClick()}></td>
+                            </tr>
+                            <tr>
+                                <td>E2</td>
+                                <td id="E2-00" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E2-01" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E2-02" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E2-03" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E2-04" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E2-05" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E2-06" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E2-07" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E2-08" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E2-09" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E2-10" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E2-11" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E2-12" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E2-13" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E2-14" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="E2-15" className="" onClick={() => this.matrixCellOnClick()}></td>
+                            </tr>
+                            <tr>
+                                <td>F2</td>
+                                <td id="F2-00" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F2-01" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F2-02" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F2-03" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F2-04" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F2-05" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F2-06" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F2-07" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F2-08" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F2-09" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F2-10" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F2-11" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F2-12" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F2-13" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F2-14" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F2-15" className="" onClick={() => this.matrixCellOnClick()}></td>
+                            </tr>
+                            <tr>
+                                <td>F#2</td>
+                                <td id="F#2-00" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#2-01" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#2-02" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#2-03" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#2-04" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#2-05" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#2-06" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#2-07" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#2-08" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#2-09" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#2-10" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#2-11" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#2-12" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#2-13" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#2-14" className="" onClick={() => this.matrixCellOnClick()}></td>
+                                <td id="F#2-15" className="" onClick={() => this.matrixCellOnClick()}></td>
+                            </tr>
+                            <tr>
+                                <td>G2</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>G#2</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>A2</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>A#2</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>B2</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            {/* Octava 3 */}
+                            <tr className="octave-three">
+                                <td>C3</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>C#3</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>D3</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>D#3</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>E3</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>F3</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>F#3</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>G3</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>G#3</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>A3</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>A#3</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>B3</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            {/* Octava 4 */}
+                            <tr className="octave-four">
+                                <td>C4</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>C#4</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>D4</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>D#4</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>E4</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>F4</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>F#4</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>G4</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>G#4</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>A4</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>A#4</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>B4</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            {/* Octava 5 */}
+                            <tr className="octave-five">
+                                <td>C5</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>C#5</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>D5</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>D#5</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>E5</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>F5</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>F#5</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>G5</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>G#5</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>A5</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>A#5</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>B5</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            {/* Octava 6 */}
+                            <tr className="octave-six">
+                                <td>C6</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>C#6</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>D6</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>D#6</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>E6</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>F6</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>F#6</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>G6</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>G#6</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>A6</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>A#6</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>B6</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </Table>
+                </div>
 
-                <Button variant="light" type="submit" onClick={() => this.playSeq()}>Play Sequence</Button>
+
+
+
 
 
                 <hr />
-                <p>Attack {this.state.attack * 10}</p>
+                <p>Attack {Number.parseInt(this.state.attack * 100)}</p>
                 <input name="attack" className="attack-slider" type="range" min="0" max="1" step="0.01" value={this.state.attack}
                     onChange={this.onChange} />
-                <p>Decay {this.state.decay * 10}</p>
+                <p>Decay {Number.parseInt(this.state.decay * 100)}</p>
                 <input name="decay" className="decay-slider" type="range" min="0" max="1" step="0.01" value={this.state.decay}
                     onChange={this.onChange} />
-                <p>Sustain {this.state.sustain * 10}</p>
+                <p>Sustain {Number.parseInt(this.state.sustain * 100)}</p>
                 <input name="sustain" className="sustain-slider" type="range" min="0" max="1" step="0.01" value={this.state.sustain}
                     onChange={this.onChange} />
                 <p>Release {this.state.release * 10}</p>

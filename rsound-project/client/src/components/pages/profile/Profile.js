@@ -1,5 +1,4 @@
 import React from 'react'
-import Project from '../projectWorkspace/ProjectWorkspace'
 
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
@@ -19,10 +18,10 @@ const Profile = props => {
                     <Col md={8}>
                         <Card className="profile">
                             <Card.Body >
+                                {/* <Card.Title><h4>{props.loggedInUser.username}</h4></Card.Title> */}
                                 <Row>
                                     <Col md={3}>
                                         {props.loggedInUser.imageUrl ? <Card.Img variant="top" src={props.loggedInUser.imageUrl} /> : <div className="initial-letter">{props.loggedInUser.username.charAt(0)}</div>}
-                                        {/* <Card.Title>{props.loggedInUser.username}</Card.Title> */}
                                     </Col>
                                     <Col md={8} className="user-projects">
                                         {props.loggedInUser.projects ? <p>{props.loggedInUser.projects}</p> : <p>It seems you haven't created your first project yet.</p>}
@@ -32,14 +31,7 @@ const Profile = props => {
                         </Card>
                     </Col>
                 </Row>
-                <hr></hr>
-                <Row>
-                    <Col md={8}>
-                        <Project />
-                    </Col>
-                </Row>
             </Container>
-
         </>
     )
 }

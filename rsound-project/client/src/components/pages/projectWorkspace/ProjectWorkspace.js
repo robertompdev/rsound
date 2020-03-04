@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import Synth from './Synth'
 
+import Container from 'react-bootstrap/Container'
+
+
 class Project extends Component {
 
     constructor() {
@@ -13,7 +16,9 @@ class Project extends Component {
 
     render() {
         return (
-            <Synth />
+            <Container>
+                <Synth />
+            </Container>
         )
     }
 }
