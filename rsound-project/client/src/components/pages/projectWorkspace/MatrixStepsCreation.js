@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { Component } from 'react'
+
+/* --- Styling import --- */
 import TableRow from './TableRow'
 import TableCol from './TableColumn'
 
-class MSC extends React.Component {
+class MSC extends Component {
 
     constructor(props) {
         super(props)
@@ -16,10 +18,6 @@ class MSC extends React.Component {
             this.state.numberOfOctaves.map((elm, idx) =>
                 <TableCol />
             ))
-
-
-
-
     }
 }
 

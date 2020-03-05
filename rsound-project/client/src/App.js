@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-/* --- styling impor */
+/* --- styling import --- */
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
-
+/* --- react-router-dom import --- */
 import { Switch, Route, Redirect } from 'react-router-dom'
 
-
+/* --- components import --- */
 import ProjectsList from './components/pages/projectsList/ProjectsList'
 import ProjectDetails from './components/pages/projectDetails/ProjectDetails'
 
@@ -17,6 +17,7 @@ import Signup from './components/pages/auth/signup/Signup'
 import Profile from './components/pages/profile/Profile'
 import Login from './components/pages/auth/login/Login'
 
+/* --- services import --- */
 import AuthServices from './services/auth.services'
 
 class App extends Component {

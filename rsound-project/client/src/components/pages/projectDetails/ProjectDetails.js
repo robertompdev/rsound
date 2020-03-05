@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
 
+/* --- components import --- */
 import Services from '../../../services/project.services'
 import Project from '../projectWorkspace/ProjectWorkspace'
 
-import './project-details.css'
-
+/* --- styling import --- */
 import Container from 'react-bootstrap/Container'
 import Card from 'react-bootstrap/Card'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Col'
+import './project-details.css'
 
 class ProjectDetails extends Component {
 

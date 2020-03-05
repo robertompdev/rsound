@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
 
+/* --- styling import --- */
 import Button from 'react-bootstrap/Button'
 import Dropdown from 'react-bootstrap/Dropdown'
 import Table from 'react-bootstrap/Table'
-
-import octavesJson from '../../data/notes.json'
-
-
-import MatrixSteps from './MatrixStepsCreation'
-
 import './Synth.css'
 
+/* --- json data import --- */
+import octavesJson from '../../data/notes.json'
+
+/* --- components import --- */
+import MatrixSteps from './MatrixStepsCreation'
 
 class Synth extends Component {
 
@@ -28,7 +28,6 @@ class Synth extends Component {
             matrix: []
         }
     }
-
 
     playSeq() {
         let i = 0

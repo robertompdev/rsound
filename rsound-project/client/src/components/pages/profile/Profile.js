@@ -1,10 +1,10 @@
 import React from 'react'
 
+/* --- styling import --- */
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import Card from 'react-bootstrap/Card'
 import Container from 'react-bootstrap/Container'
-
 import './Profile.css'
 
 const Profile = props => {

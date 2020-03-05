@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
 
+/* --- services import --- */
 import ProjectsServices from '../../../services/project.services'
 
+/* --- components import --- */
 import ProjectForm from '../projectForm/ProjectForm'
 import ProjectCard from './ProjectCard'
 
+/* --- styling import --- */
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Button from 'react-bootstrap/Button'

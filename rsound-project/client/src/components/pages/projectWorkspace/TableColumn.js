@@ -1,4 +1,6 @@
 import React from 'react'
+
+/* --- styling import --- */
 import TableRow from './TableRow'
 
 class Col extends React.Component {
@@ -11,7 +13,6 @@ class Col extends React.Component {
             notes: ["C", "C#", "D", "D#", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
         }
     }
-
 
     render() {
         return (

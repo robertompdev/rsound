@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
 
+/* --- styling import --- */
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 
+/* --- services import --- */
 import AuthServices from '../../services/auth.services'
 
+/* --- react-router-dom import --- */
 import { Link } from 'react-router-dom'
 
 class Navigation extends Component {
