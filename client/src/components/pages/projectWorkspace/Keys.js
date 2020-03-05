@@ -14,7 +14,7 @@ class Key extends Component {
     render() {
         return (
             <>
-                {this.state.notes.map((note, idx) => <div className={`key-note ${note}`} key={idx} octave={this.props.octave} note={note}>{note}{this.props.octave} S:{this.props.step}</div>)}
+                {this.state.notes.map((note, idx) => <div className="key-note" key={idx} octave={this.props.octave} note={note} step={this.props.step} onClick={this.props.matrixCellOnClick}></div>)}
             </>
         )
     }

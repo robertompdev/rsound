@@ -1,6 +1,6 @@
 .div-seq{
     height: 400px;
-    min-width: 800px;
+    /* min-width: 800px; */
     overflow: scroll;   
 }
 
@@ -9,9 +9,10 @@
 }
 
 .key-note {
-  border:solid 0.2px tomato ;
+  border:solid 0.2px white;
+  background-color: #FFE4D3;
   height: 10px;
-  min-width: 20px;
+  min-width: 10px;
   font-size: 0.5em;
   text-align: center;
 }

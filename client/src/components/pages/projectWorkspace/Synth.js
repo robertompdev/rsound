@@ -68,24 +68,23 @@ class Synth extends Component {
     }
 
 
-    matrixCellOnClick(e) {
+    matrixCellOnClick = (e) => {
+        e = e || window.event
+        e = e.target || e.srcElement
+        console.log(e)
+        if (e.class === 'key-note') {
+            let restOfKeys = document.getElementsByClassName(e.className)
+            let newSequence = [...this.state.sequence]
 
-        alert("YAYAYAY")
-        // e = e || window.event
-        // e = e.target || e.srcElement
-        // if (e.nodeName === 'TD') {
-        //     let restOfKeys = document.getElementsByClassName(e.className)
-        //     let newSequence = [...this.state.sequence]
+            for (let i = 0; i < restOfKeys.length; i++) { restOfKeys[i].style.backgroundColor = "transparent" }
 
-        //     for (let i = 0; i < restOfKeys.length; i++) { restOfKeys[i].style.backgroundColor = "transparent" }
+            document.getElementById(e.id).style.background = "#F16B24"
+            newSequence[parseInt(e.id.substring(e.id.length - 2))] = e.id.substring(0, e.id.length - 3)
 
-        //     document.getElementById(e.id).style.background = "#F16B24"
-        //     newSequence[parseInt(e.id.substring(e.id.length - 2))] = e.id.substring(0, e.id.length - 3)
+            this.setState({ sequence: newSequence })
 
-        //     this.setState({ sequence: newSequence })
-
-        //     console.log(newSequence)
-        // }
+            console.log(newSequence)
+        }
     }
 
     render() {
@@ -108,7 +107,7 @@ class Synth extends Component {
                 <Button variant="light" type="submit" onClick={() => this.playSeq()} >Play Pattern</Button>
                 <div className="div-seq">
                     <hr />
-                    <MSC />
+                    <MSC matrixCellOnClick={() => this.matrixCellOnClick()} />
                 </div>
 
                 {/* CONTROLES ADSR */}
