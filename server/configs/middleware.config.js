@@ -26,7 +26,7 @@ module.exports = app => {
     }))
 
     // CORS setup
-    const whitelist = ['http://localhost:3000']
+    const whitelist = ['http://localhost:3000', 'https://rsound.herokuapp.com/']
     const corsOptions = {
         origin: (origin, cb) => {
             const originWhitelisted = whitelist.includes(origin)
