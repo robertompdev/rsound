@@ -28,7 +28,10 @@ class ProjectsList extends Component {
 
     getAllProjects = () => {
         this.services.getAllProjects()
-            .then(allProjects => this.setState({ projects: allProjects }))
+            .then(allProjects => {
+                console.log(allProjects)
+                this.setState({ projects: allProjects })
+            })
             .catch(err => console.log(err))
     }
 
