@@ -3,14 +3,14 @@ import React, { Component } from 'react'
 /* --- styling import --- */
 import Button from 'react-bootstrap/Button'
 import Dropdown from 'react-bootstrap/Dropdown'
-import Table from 'react-bootstrap/Table'
 import './Synth.css'
 
 /* --- json data import --- */
 import octavesJson from '../../data/notes.json'
 
 /* --- components import --- */
-import MatrixSteps from './MatrixStepsCreation'
+import MSC from './MatrixStepsCreation'
+
 
 class Synth extends Component {
 
@@ -104,38 +104,11 @@ class Synth extends Component {
                     </Dropdown.Menu>
                 </Dropdown>
                 <hr />
-                <p>Pattern Sequencer</p>
-                <Button variant="light" type="submit" onClick={() => this.playSeq()} >Play Pattern</Button>
                 <div className="div-seq">
-                    <Table striped bordered hover size="sm">
-                        <thead>
-                            <tr>
-                                <th>1</th>
-                                <th>2</th>
-                                <th>3</th>
-                                <th>4</th>
-                                <th>5</th>
-                                <th>6</th>
-                                <th>7</th>
-                                <th>8</th>
-                                <th>9</th>
-                                <th>10</th>
-                                <th>11</th>
-                                <th>12</th>
-                                <th>13</th>
-                                <th>14</th>
-                                <th>15</th>
-                                <th>16</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                            <MatrixSteps matrixCellOnClick={this.matrixCellOnClick} />
-
-                            {/* Octava 1 */}
-
-                        </tbody>
-                    </Table>
+                    <p>Pattern Sequencer</p>
+                    <Button variant="light" type="submit" onClick={() => this.playSeq()} >Play Pattern</Button>
+                    <hr />
+                    <MSC />
                 </div>
 
 
@@ -153,7 +126,7 @@ class Synth extends Component {
                 <p>Sustain {Number.parseInt(this.state.sustain * 100)}</p>
                 <input name="sustain" className="sustain-slider" type="range" min="0" max="1" step="0.01" value={this.state.sustain}
                     onChange={this.onChange} />
-                <p>Release {this.state.release * 10}</p>
+                <p>Release {this.state.release * 100}</p>
                 <input name="release" className="release-slider" type="range" min="0" max="1" step="0.01" value={this.state.release}
                     onChange={this.onChange} />
 

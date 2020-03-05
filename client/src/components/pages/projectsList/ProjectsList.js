@@ -9,6 +9,7 @@ import ProjectCard from './ProjectCard'
 
 /* --- styling import --- */
 import Container from 'react-bootstrap/Container'
+import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
@@ -42,13 +43,17 @@ class ProjectsList extends Component {
         return (
             <Container>
                 <h1>Projects</h1>
-                <div className="Row">
-                    {this.props.loggedInUser && <Button className="mb-20" variant="dark" onClick={this.openModal}>Create project</Button>}
-                </div>
+                <Row>
+                    <Col>
+                        {this.props.loggedInUser && <Button className="mb-20" variant="dark" onClick={this.openModal}>Create project</Button>}
+                    </Col>
+                </Row>
                 <div className="Row">
                     {this.state.projects.length ? (
                         <Row>
+
                             {this.state.projects.map(elm => <ProjectCard key={elm._id} {...elm} />)}
+
                         </Row>
                     )
                         :

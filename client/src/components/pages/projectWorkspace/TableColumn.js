@@ -3,14 +3,14 @@ import React from 'react'
 /* --- styling import --- */
 import TableRow from './TableRow'
 
-class Col extends React.Component {
+class ColRow extends React.Component {
 
     constructor(props) {
         super(props)
         this.state = {
             numberOfSteps: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
             numberOfOctaves: [1, 2, 3, 4, 5, 6, 7],
-            notes: ["C", "C#", "D", "D#", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
+            notes: ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
         }
     }
 
@@ -31,4 +31,4 @@ class Col extends React.Component {
     }
 }
 
-export default Col
+export default ColRow
