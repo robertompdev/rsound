@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
+/* --- styling impor */
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+
 
 import { Switch, Route, Redirect } from 'react-router-dom'
 
+
 import ProjectsList from './components/pages/projectsList/ProjectsList'
 import ProjectDetails from './components/pages/projectDetails/ProjectDetails'
+
 import NavBar from './components/ui/NavBar'
 
 import Signup from './components/pages/auth/signup/Signup'
