@@ -1,6 +1,19 @@
 .div-seq{
     height: 400px;
-    overflow: scroll;
+    min-width: 800px;
+    overflow: scroll;   
+}
+
+.step-col {
+  margin: 0px;
+}
+
+.key-note {
+  border:solid 0.2px tomato ;
+  height: 10px;
+  min-width: 20px;
+  font-size: 0.5em;
+  text-align: center;
 }
 
 table {

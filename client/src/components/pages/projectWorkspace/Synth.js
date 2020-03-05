@@ -104,16 +104,12 @@ class Synth extends Component {
                     </Dropdown.Menu>
                 </Dropdown>
                 <hr />
+                <p>Pattern Sequencer</p>
+                <Button variant="light" type="submit" onClick={() => this.playSeq()} >Play Pattern</Button>
                 <div className="div-seq">
-                    <p>Pattern Sequencer</p>
-                    <Button variant="light" type="submit" onClick={() => this.playSeq()} >Play Pattern</Button>
                     <hr />
                     <MSC />
                 </div>
-
-
-
-
 
                 {/* CONTROLES ADSR */}
                 <hr />
