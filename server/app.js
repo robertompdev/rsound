@@ -20,7 +20,7 @@ app.use('/api/files', require('./routes/files.routes.js'))
 
 // Default index
 app.use((req, res) => {
-    res.sendFile(__dirname + "/public/index.html")
+    res.sendFile(__dirname + '/public/index.html')
 })
 
 module.exports = app
