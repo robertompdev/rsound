@@ -50,9 +50,7 @@ class ProjectsList extends Component {
                 <div className="Row">
                     {this.state.projects.length ? (
                         <Row>
-
                             {this.state.projects.map(elm => <ProjectCard key={elm._id} {...elm} />)}
-
                         </Row>
                     )
                         :

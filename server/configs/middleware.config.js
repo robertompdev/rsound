@@ -1,6 +1,5 @@
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
-//const favicon = require('serve-favicon')
 const hbs = require('hbs');
 const logger = require('morgan')
 const path = require('path')
@@ -32,7 +31,7 @@ module.exports = app => {
             const originWhitelisted = whitelist.includes(origin)
             cb(null, originWhitelisted)
         },
-        credentials: true // RUTAS PERSISTENTES
+        credentials: true
     }
     app.use(cors(corsOptions))
 
@@ -40,5 +39,4 @@ module.exports = app => {
     app.set('views', path.join(__dirname, '..', 'views'))
     app.set('view engine', 'hbs')
     app.use(express.static(path.join(__dirname, '..', 'public')))
-    //app.use(favicon(path.join(__dirname, '..', 'public', 'images', 'favicon.ico')))
 }

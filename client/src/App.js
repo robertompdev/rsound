@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
 /* --- styling import --- */
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css'
+import './App.css'
 
 /* --- react-router-dom import --- */
 import { Switch, Route, Redirect } from 'react-router-dom'

@@ -19,12 +19,26 @@ class MSC extends Component {
     render() {
         return (
             <>
-                <Row className="no-gutters">
-                    {this.state.numberOfSteps.map((step, idx) => <div className="step-header" key={idx}>{step}</div>)}
-                </Row>
-                <Row className="div-seq no-gutters">
-                    {this.state.numberOfSteps.map((step, idx) => <Col className="step-col" key={idx}><Octave {...this.props} step={step} /></Col>)}
-                </Row>
+                <div className="div-seq">
+
+                    <Row className="no-gutters">
+
+                        <div className="step-header">
+                            Notes
+                        </div>
+
+
+                        {this.state.numberOfSteps.map((step, idx) => <div className="step-header" key={idx}>{step}</div>)}
+                    </Row>
+                    <Row className="div-seq no-gutters">
+
+                        <div className="step-header">
+                            Notes
+                        </div>
+
+                        {this.state.numberOfSteps.map((step, idx) => <Col className="step-col" key={idx}><Octave {...this.props} step={step} /></Col>)}
+                    </Row>
+                </div>
             </>)
     }
 }
