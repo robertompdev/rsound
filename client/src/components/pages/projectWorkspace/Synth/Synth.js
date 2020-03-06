@@ -10,6 +10,7 @@ import octavesJson from '../../../data/notesSimplified.json'
 
 /* --- components import --- */
 import MSC from './MatrixStepsCreation'
+import Audio from './Audio'
 
 
 class Synth extends Component {
@@ -24,31 +25,34 @@ class Synth extends Component {
             sequence: ["NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote"],
             sustain: 0.05,
             volume: 1,
-            wave: 'sawtooth'
+            wave: 'sawtooth',
         }
     }
 
+
     // Audio Node
     startOsc = (freq) => {
-        let audioCtx = new window.AudioContext()
-        let osc = audioCtx.createOscillator()
-        let gain = audioCtx.createGain()
+        // let audioCtx = new window.AudioContext()
+        // let audioCtx = this.state.ctx
+        console.log(Audio)
+        let osc = Audio.context.createOscillator()
+        let gain = Audio.context.createGain()
 
         // Create OscillatorNode
-        osc = audioCtx.createOscillator() // Create sound source
+        osc = Audio.context.createOscillator() // Create sound source
         osc.type = this.state.wave
         osc.frequency.value = freq // Frequency in hertz (passed from input button)
         osc.start(0) // Play oscillator instantly
 
         // Create GainNode	
-        gain = audioCtx.createGain() // Create gain node
+        gain = Audio.context.createGain() // Create gain node
         gain.gain.value = this.state.volume // Set gain to full volume
 
-        gain.gain.setTargetAtTime(0, audioCtx.currentTime + this.state.sustain, this.state.release) //Sustain Release
+        gain.gain.setTargetAtTime(0, Audio.context.currentTime + this.state.sustain, this.state.release) //Sustain Release
 
         // Connect the Nodes
         osc.connect(gain) // Connect oscillator to gain
-        gain.connect(audioCtx.destination) // Connect gain to output
+        gain.connect(Audio.context.destination) // Connect gain to output
     }
 
     // If parent matrix step changes, then it plays a note from the sequence in the array
