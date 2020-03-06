@@ -1,33 +1,24 @@
 .div-seq{
     height: 400px;
-    /* min-width: 800px; */
+    min-width: 300px;
     overflow: scroll;   
-}
-
-.step-col {
-  margin: 0px;
 }
 
 .key-note {
   border:solid 0.2px white;
   background-color: #FFE4D3;
   height: 10px;
-  min-width: 10px;
+  min-width: 50px;
   font-size: 0.5em;
   text-align: center;
 }
 
-table {
-  table-layout: fixed;
-  font-size: 11px;
+.step-header {
+  border:solid 0.2px white;
+  background-color: #555B6E;
+  color: white;
+  min-width: 50px;
   text-align: center;
-  background-color: white;
+  display: inline-block;
 }
 
-table td {
-    font-size: 9px;
-}
-
-table .selected {
-  background-color: #F16B24;
-}

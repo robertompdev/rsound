@@ -34,9 +34,8 @@ class ProjectDetails extends Component {
                 <Card className="card-project">
                     <Card.Body>
                         <Row>
-                            <Col md={4}>
-
-                                <h4>{this.state.project.title}</h4>
+                            <Col md={9}>
+                                <h2>{this.state.project.title}</h2>
                                 <p>Parameters:  {this.state.project.parameters}</p>
                             </Col>
                             <Col md={3}>
@@ -45,7 +44,7 @@ class ProjectDetails extends Component {
                         </Row>
                         <hr></hr>
                         <Row>
-                            <Col md={8}>
+                            <Col md={12}>
                                 <Project />
                             </Col>
                         </Row>

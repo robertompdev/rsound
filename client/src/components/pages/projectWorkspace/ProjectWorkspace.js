@@ -16,8 +16,10 @@ class Project extends Component {
     }
 
     render() {
+
         return (
             <Container>
+                <h3>Synth A</h3>
                 <Synth />
             </Container>
         )
