@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 
 /* --- styling import --- */
-import Button from 'react-bootstrap/Button'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import './Synth.css'
 
 /* --- json data import --- */
-import octavesJson from '../../data/notesSimplified.json'
+import octavesJson from '../../../data/notesSimplified.json'
 
 /* --- components import --- */
 import MSC from './MatrixStepsCreation'
@@ -20,24 +19,14 @@ class Synth extends Component {
         this.state = {
             attack: 0,
             audioCtx: new window.AudioContext(),
-            bpm: 140,
             decay: 1,
-            matrix: [],
+            // matrix: [],
             octaves: octavesJson,
             release: 0.15,
             sequence: [],
             sustain: 0.05,
             wave: 'sawtooth'
         }
-    }
-
-    playSeq() {
-        let i = 0
-        setInterval(() => {
-            console.log(i, this.state.sequence[i], this.state.sequence.length - 1)
-            i === this.state.sequence.length - 1 ? this.playSeq() : this.startOsc(this.state.sequence[i])
-            i++
-        }, 1000 / (this.state.bpm / 30))
     }
 
     startOsc = (freq) => {
@@ -69,41 +58,40 @@ class Synth extends Component {
         })
     }
 
-    // 
+    // Matrix step selection logic
     matrixCellOnClick = (e) => {
         e = e || window.event
         e = e.target || e.srcElement
 
-        if (e.className.includes('key-note')) {
-            let newSequence = [...this.state.sequence]
-            let restOfKeys = document.getElementsByClassName(e.className)
-            let stepNumber = parseInt(e.id.slice(-2)) - 1
-            let selectedKey = e.id.split('0')[0]
-            let selectedCell = document.getElementById(e.id)
+        let newSequence = [...this.state.sequence]
+        let restOfKeys = document.getElementsByClassName(e.className)
+        let stepNumber = parseInt(e.id.slice(-2)) - 1
+        let selectedKey = e.id.split('0')[0]
+        let selectedCell = document.getElementById(e.id)
 
-            if (selectedCell.style.background === "#F16B24") {
-                newSequence[stepNumber] = ""
-                selectedCell.style.background = "#FFE4D3"
-            } else {
+        for (let i = 0; i < restOfKeys.length; i++) { restOfKeys[i].style.backgroundColor = "#FFE4D3" }
 
-                for (let i = 0; i < restOfKeys.length; i++) { restOfKeys[i].style.backgroundColor = "#FFE4D3" }
-
-                newSequence[stepNumber] = selectedKey
-                this.setState({ sequence: newSequence })
-                selectedCell.style.background = "#F16B24"
-            }
-            this.startOsc(octavesJson[selectedKey])
+        if (selectedCell.className.includes('selected')) {
+            newSequence[stepNumber] = ""
+            selectedCell.className = `key-note ${stepNumber + 1}`
+        } else {
+            newSequence[stepNumber] = selectedKey
+            selectedCell.className = `key-note ${stepNumber + 1} selected`
+            selectedCell.style.background = "#F16B24"
         }
+
+        this.setState({ sequence: newSequence })
+        this.startOsc(octavesJson[selectedKey])
+        console.log(this.state.sequence)
     }
 
     render() {
         return (
             <>
                 <Row>
+                    {/* MATRIX STEP SEQUENCER */}
                     <Col md={12}>
-                        {/* MATRIX STEP SEQUENCER */}
                         <h4>Pattern Sequencer</h4>
-                        <Button variant="light" type="submit" onClick={() => this.playSeq()} >Play Pattern</Button>
                     </Col>
                     <Col md={1}>
                         <div className="step-header">
@@ -119,10 +107,11 @@ class Synth extends Component {
                     <Col md={2}>
                         {/* WAVE TYPE SELECTOR */}
                         <h4>Wave Type</h4>
-                        <select className="form-control" onChange={this.handleSelectionChanged} defaultValue="sine">
+                        <select className="form-control" onChange={this.handleSelectionChanged} defaultValue="sawtooth">
+                            <option value="sawtooth" defaultValue>Sawtooth</option>
                             <option value="sine" defaultValue>Sine</option>
-                            <option value="triangle">Triangle</option>
                             <option value="square">Square</option>
+                            <option value="triangle">Triangle</option>
                         </select>
                     </Col>
                     <Col md={10}>
@@ -143,18 +132,6 @@ class Synth extends Component {
                     </Col>
                     <hr />
                 </Row>
-
-
-
-
-                {/* MAPPING DE JSON PARA GENERAR TECLAS */}
-                {/* <hr />
-                {
-                    this.state.octaves.octaves.one.map((note, index) => (
-                        <Button variant="light" type="submit" onClick={() => this.startOsc(note.frequency)} key={index}>{note.note}1</Button>
-                    ))
-                }
-            */}
             </>
         )
     }
