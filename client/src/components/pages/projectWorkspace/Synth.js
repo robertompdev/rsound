@@ -19,14 +19,15 @@ class Synth extends Component {
         super()
         this.state = {
             attack: 0,
-            decay: 1,
-            sustain: 0.05,
-            release: 0.15,
-            wave: 'sawtooth',
+            audioCtx: new window.AudioContext(),
             bpm: 140,
-            sequence: [],
+            decay: 1,
+            matrix: [],
             octaves: octavesJson,
-            matrix: []
+            release: 0.15,
+            sequence: [],
+            sustain: 0.05,
+            wave: 'sawtooth'
         }
     }
 
@@ -40,7 +41,7 @@ class Synth extends Component {
     }
 
     startOsc = (freq) => {
-        let audioCtx = new window.AudioContext()
+        let audioCtx = this.state.audioCtx
         let osc = audioCtx.createOscillator()
         let gain = audioCtx.createGain()
 
@@ -61,12 +62,14 @@ class Synth extends Component {
         gain.connect(audioCtx.destination) // Connect gain to output
     }
 
+    // Wave type selector updates 'wave' property in state
     handleSelectionChanged = (e) => {
         this.setState({
             wave: e.target.value
         })
     }
 
+    // 
     matrixCellOnClick = (e) => {
         e = e || window.event
         e = e.target || e.srcElement
@@ -89,16 +92,8 @@ class Synth extends Component {
                 this.setState({ sequence: newSequence })
                 selectedCell.style.background = "#F16B24"
             }
-
-            console.log(newSequence)
-            //this.getFreqFromJson(e.id.split('0')[0])
+            this.startOsc(octavesJson[selectedKey])
         }
-    }
-
-    getFreqFromJson(note) {
-        return octavesJson.filter(
-            function (octavesJson) { return octavesJson.note === note }
-        )
     }
 
     render() {

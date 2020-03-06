@@ -30,7 +30,6 @@ class ProjectsList extends Component {
     getAllProjects = () => {
         this.services.getAllProjects()
             .then(allProjects => {
-                console.log(allProjects)
                 this.setState({ projects: allProjects })
             })
             .catch(err => console.log(err))
@@ -69,7 +68,6 @@ class ProjectsList extends Component {
                         <ProjectForm closeModal={this.closeModal} refreshList={this.getAllProjects} />
                     </Modal.Body>
                 </Modal>
-
             </Container>
         )
     }

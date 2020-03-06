@@ -23,7 +23,7 @@ class MSC extends Component {
                     {this.state.numberOfSteps.map((step, idx) => <div className="step-header" key={idx}>{step}</div>)}
                 </Row>
                 <Row className="div-seq no-gutters">
-                    {this.state.numberOfSteps.map((step, idx) => <Col className="step-col" key={idx}><Octave {...this.props} step={step} />1ooffff</Col>)}
+                    {this.state.numberOfSteps.map((step, idx) => <Col className="step-col" key={idx}><Octave {...this.props} step={step} /></Col>)}
                 </Row>
             </>)
     }
