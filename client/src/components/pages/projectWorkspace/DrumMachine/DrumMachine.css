@@ -1,0 +1,24 @@
+.div-seq-drum{
+    height: 400px;
+    min-width: 300px;
+    overflow: scroll;   
+}
+
+.drum-note {
+  border:solid 0.2px white;
+  background-color: #FFE4D3;
+  height: 10px;
+  min-width: 50px;
+  font-size: 0.5em;
+  text-align: center;
+}
+
+.step-header {
+  border:solid 0.2px white;
+  background-color: #555B6E;
+  color: white;
+  min-width: 50px;
+  text-align: center;
+  display: inline-block;
+}
+

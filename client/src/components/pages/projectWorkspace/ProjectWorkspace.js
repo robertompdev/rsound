@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 /* --- components import --- */
 import Synth from './Synth/Synth'
+import DrumMachine from './DrumMachine/DrumMachine'
 
 /* --- styling import --- */
 import Button from 'react-bootstrap/Button'
@@ -52,6 +53,9 @@ class Project extends Component {
                 <hr />
                 <h3>Synth A</h3>
                 <Synth playStep={this.state.step} />
+                <hr />
+                <h3>Drum Machine</h3>
+                <DrumMachine playStep={this.state.step} />
             </Container>
         )
     }
