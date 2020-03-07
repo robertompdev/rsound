@@ -3,99 +3,157 @@ import React, { Component } from 'react'
 /* --- styling import --- */
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
+import Button from 'react-bootstrap/Button'
 import './DrumMachine.css'
 
-/* --- json data import --- */
-import octavesJson from '../../../data/notesSimplified.json'
-
 /* --- components import --- */
-import MSC from './MatrixStepsCreation'
 import Audio from './Audio'
 
-class Synth extends Component {
+class DrumMachine extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
-            attack: 0,
-            decay: 1,
-            octaves: octavesJson,
-            release: 0.02,
-            sequence: ["NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote"],
-            sustain: 0.02,
+            selectedResolution: 7.5,
             volume: 1,
-            wave: 'sine',
+            step: 0,
+            bdSeq: ["BD", "NoNote", "NoNote", "NoNote", "BD", "NoNote", "NoNote", "NoNote", "BD", "NoNote", "NoNote", "NoNote", "BD", "NoNote", "NoNote", "NoNote", "BD", "NoNote", "NoNote", "NoNote", "BD", "NoNote", "NoNote", "NoNote", "BD", "NoNote", "NoNote", "NoNote", "BD", "NoNote", "NoNote", "NoNote", "NoNote", "BD", "BD"],
+            snSeq: ["NoNote", "NoNote", "NoNote", "NoNote", "SN", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "SN", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "SN", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "SN", "NoNote", "NoNote", "NoNote"],
+            rtSeq: ["NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote"],
+            hhSeq: ["NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote"]
         }
     }
 
-    ///HACER LOS SONIDOS DE LA DRUM MACHINE EN ARCHIVO APARTE
-
-
-    // If parent matrix step changes, then it plays a note from the sequence in the array
+    // If parent matrix step property updates, then it plays next note from the sequence in the array
     componentDidUpdate(prevProps) {
         if (prevProps.playStep !== this.props.playStep) {
-            this.playSequence()
+            if (this.props.playStep % parseInt(this.state.selectedResolution) === 0) {
+                this.playSequence()
+            }
         }
     }
+
+    // Reset sequence to step index zero 
+    setStepToZero() { this.setState({ step: 0 }) }
 
     // Plays the note stored in the index array
     playSequence() {
-        this.startOsc(octavesJson[this.state.sequence[this.props.playStep]])
+        this.setState({ step: this.state.step + 1 })
+        if (this.state.step === 31) { this.setStepToZero() }
+        if (this.state.bdSeq[this.state.step] != "NoNote") { this.startDB() }
+        if (this.state.snSeq[this.state.step] != "NoNote") { this.startSN() }
     }
 
-    // Wave type selector updates 'wave' property in state
-    handleSelectionChanged = (e) => {
-        this.setState({
-            wave: e.target.value
-        })
+    startDB() {
+        let time = Audio.context.currentTime
+        let osc = Audio.context.createOscillator()
+        let gain = Audio.context.createGain()
+        osc = Audio.context.createOscillator()
+        osc.frequency.setValueAtTime(150, time);
+        gain.gain.value = this.state.volume
+
+        osc.frequency.exponentialRampToValueAtTime(0.01, time + 0.5);
+        gain.gain.exponentialRampToValueAtTime(0.01, time + 0.5);
+
+        osc.connect(gain) // Connect oscillator to gain
+        gain.connect(Audio.context.destination) // Connect gain to output
+
+        osc.start(time)
+        osc.stop(time + 0.5)
     }
 
-    onChange = event => {
-        const { name, value } = event.target
-        this.setState({
-            [name]: value
-        })
+    startRT() {
+        let time = Audio.context.currentTime
+        let osc = Audio.context.createOscillator()
+        let gain = Audio.context.createGain()
+        osc = Audio.context.createOscillator()
+        osc.frequency.setValueAtTime(1500, time);
+        gain.gain.value = this.state.volume
+
+        osc.frequency.exponentialRampToValueAtTime(0.01, time + 0.5);
+        gain.gain.exponentialRampToValueAtTime(0.01, time + 0.5);
+
+        osc.connect(gain) // Connect oscillator to gain
+        gain.connect(Audio.context.destination) // Connect gain to output
+
+        osc.start(time)
+        osc.stop(time + 0.5)
     }
 
-    // Matrix step selection logic
-    matrixCellOnClick = (e) => {
-        e = e || window.event
-        e = e.target || e.srcElement
-        console.log(e)
-        let newSequence = [...this.state.sequence]
-        let restOfKeys = document.getElementsByClassName(e.className)
-        let stepNumber = parseInt(e.id.slice(-2)) - 1
-        let selectedKey = e.id.split('0')[0]
-        let selectedCell = document.getElementById(e.id)
+    startHH() {
+        let time = Audio.context.currentTime
+        let osc = Audio.context.createOscillator()
+        let gain = Audio.context.createGain()
+        osc = Audio.context.createOscillator()
+        osc.frequency.setValueAtTime(6000, time);
+        gain.gain.value = this.state.volume
 
-        for (let i = 0; i < restOfKeys.length; i++) { restOfKeys[i].style.backgroundColor = "#FFE4D3" }
+        osc.frequency.exponentialRampToValueAtTime(0.06, time + 0.05);
+        gain.gain.exponentialRampToValueAtTime(0.02, time + 0.1);
 
-        if (selectedCell.className.includes('selected')) {
-            newSequence[stepNumber] = ""
-            selectedCell.className = `drum-note ${stepNumber + 1}`
-        } else {
-            newSequence[stepNumber] = selectedKey
-            selectedCell.className = `drum-note ${stepNumber + 1} selected`
-            selectedCell.style.background = "#F16B24"
-            this.startOsc(octavesJson[selectedKey])
+        osc.connect(gain) // Connect oscillator to gain
+        gain.connect(Audio.context.destination) // Connect gain to output
+
+        osc.start(time)
+        osc.stop(time + 0.05)
+    }
+
+    startSN() {
+        let audioContext = Audio.context
+        let time = audioContext.currentTime
+        let node = audioContext.createBufferSource(),
+            buffer = audioContext.createBuffer(1, 4096, audioContext.sampleRate),
+            data = buffer.getChannelData(0);
+
+        for (var i = 0; i < 4096; i++) {
+            data[i] = Math.random();
         }
 
-        this.setState({ sequence: newSequence })
+        node.buffer = buffer;
+        node.loop = true;
+        node.start(time)
+        node.stop(time + 0.2)
+        node.connect(audioContext.destination)
 
-        console.log(this.state.sequence)
+        let filter = audioContext.createBiquadFilter()
+        filter.type = "highpass"
+
+        filter.frequency.setValueAtTime(100, time)
+        filter.frequency.linearRampToValueAtTime(1000, time + 1)
+
+        let noiseEnvelope = audioContext.createGain()
+        filter.connect(noiseEnvelope);
+
+        noiseEnvelope.gain.setValueAtTime(1, time)
+        noiseEnvelope.gain.exponentialRampToValueAtTime(0.01, time + 0.2)
+        noiseEnvelope.connect(audioContext.destination)
+
+        let osc = audioContext.createOscillator();
+        osc.type = 'triangle';
+
+        let oscEnvelope = audioContext.createGain();
+        osc.connect(oscEnvelope);
+
+        osc.frequency.setValueAtTime(100, time);
+        oscEnvelope.gain.setValueAtTime(0.7, time);
+        oscEnvelope.gain.exponentialRampToValueAtTime(0.01, time + 0.1);
+        osc.start(time)
+
+        osc.stop(time + 0.2);
+        //noise.stop(time + 0.2);
+        oscEnvelope.connect(audioContext.destination);
     }
 
     render() {
         return (
             <>
                 <Row>
-                    {/* MATRIX STEP SEQUENCER */}
-                    <Col md={12}>
-                        <h4>Pattern Sequencer</h4>
-                    </Col>
-
                     <div className="div-seq-drum">
-                        <MSC matrixCellOnClick={() => this.matrixCellOnClick()} />
+                        <Button onClick={() => this.startDB()}>BD</Button>
+                        <Button onClick={() => this.startSN()}>SN</Button>
+                        <Button onClick={() => this.startRT()}>RT</Button>
+                        <Button onClick={() => this.startHH()}>HH</Button>
+                        <Button onClick={() => this.playSequence()}>PLAY</Button>
                     </div>
                     <hr />
                 </Row>
@@ -112,4 +170,4 @@ class Synth extends Component {
     }
 }
 
-export default Synth
+export default DrumMachine

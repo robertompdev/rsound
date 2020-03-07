@@ -5,6 +5,10 @@ body {
   color: #555B6E;
 }
 
+button{
+  margin: 20px,
+}
+
 h1, h2, h3, h4 {
   font-weight: 200;
 }
@@ -16,6 +20,10 @@ h1 {
 
 .mb-20 {
   margin-bottom: 20px;
+}
+
+.m-10 {
+  margin: 10px;
 }
 
 a, a:hover {

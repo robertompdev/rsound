@@ -23,8 +23,11 @@ class Synth extends Component {
             release: 0.15,
             sequence: ["NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote"],
             sustain: 0.05,
+            sustainMax: 0.05,
             volume: 1,
             wave: 'sawtooth',
+            selectedResolution: 7.5,
+            step: 0
         }
     }
 
@@ -50,30 +53,38 @@ class Synth extends Component {
         gain.connect(Audio.context.destination) // Connect gain to output
     }
 
-    // If parent matrix step changes, then it plays a note from the sequence in the array
+    // If parent matrix step property updates, then it plays next note from the sequence in the array
     componentDidUpdate(prevProps) {
         if (prevProps.playStep !== this.props.playStep) {
-            this.playSequence()
+            if (this.props.playStep % parseInt(this.state.selectedResolution) === 0) {
+                this.playSequence()
+            }
         }
     }
 
+    // Reset sequence to step index zero 
+    setStepToZero() { this.setState({ step: 0 }) }
+
     // Plays the note stored in the index array
     playSequence() {
-        this.startOsc(octavesJson[this.state.sequence[this.props.playStep]])
+        this.setState({ step: this.state.step + 1 })
+        if (this.state.step === 15) { this.setStepToZero() }
+        this.startOsc(octavesJson[this.state.sequence[this.state.step]])
     }
 
     // Wave type selector updates 'wave' property in state
     handleSelectionChanged = (e) => {
-        this.setState({
-            wave: e.target.value
-        })
+        this.setState({ wave: e.target.value })
+    }
+
+    // Note resolution type selector updates 'selectedResolution' property in state
+    handleResolutionChanged = (e) => {
+        this.setState({ selectedResolution: e.target.value })
     }
 
     onChange = event => {
         const { name, value } = event.target
-        this.setState({
-            [name]: value
-        })
+        this.setState({ [name]: value, sustainMax: this.state.release - 0.05 < 0 ? 0 : this.state.release - 0.05 })
     }
 
     // Matrix step selection logic
@@ -121,8 +132,8 @@ class Synth extends Component {
                         {/* WAVE TYPE SELECTOR */}
                         <h4>Wave Type</h4>
                         <select className="form-control" onChange={this.handleSelectionChanged} defaultValue="sawtooth">
-                            <option value="sawtooth" defaultValue>Sawtooth</option>
-                            <option value="sine" defaultValue>Sine</option>
+                            <option value="sawtooth">Sawtooth</option>
+                            <option value="sine">Sine</option>
                             <option value="square">Square</option>
                             <option value="triangle">Triangle</option>
                         </select>
@@ -132,18 +143,27 @@ class Synth extends Component {
                         <input name="volume" className="volume-slider" type="range" min="0" max="1" step="0.01" defaultValue={this.state.volume}
                             onChange={this.onChange} />
                     </Col>
-                    <Col md={10}>
+                    <Col md={2}>
                         {/* CONTROLES ADSR */}
-                        <h3>Envelope</h3>
-                        {/* <p>Decay {Number.parseInt(this.state.decay * 100)}</p>
-                        <input name="decay" className="decay-slider" type="range" min="0" max="1" step="0.01" defaultValue={this.state.decay}
-                            onChange={this.onChange} /> */}
+                        <h4>Envelope</h4>
                         <p>Sustain {Number.parseInt(this.state.sustain * 100)}</p>
-                        <input name="sustain" className="sustain-slider" type="range" min="0" max="1" step="0.01" defaultValue={this.state.sustain}
+                        <input name="sustain" className="sustain-slider" type="range" min="0" max={this.state.release} step="0.01" defaultValue={this.state.sustain}
                             onChange={this.onChange} />
                         <p>Release {this.state.release * 100}</p>
-                        <input name="release" className="release-slider" type="range" min="0" max="1" step="0.01" defaultValue={this.state.release}
+                        <input name="release" className="release-slider" type="range" min="0" max="0.3" step="0.01" defaultValue={this.state.release}
                             onChange={this.onChange} />
+                    </Col>
+                    <Col md={2}>
+                        <h4>Step Length</h4>
+                        <select className="form-control" onChange={this.handleResolutionChanged} defaultValue="7.5">
+                            <option value="120" >1/1</option>
+                            <option value="60" >1/2</option>
+                            <option value="30" >1/4</option>
+                            <option value="15" defaultValue>1/8</option>
+                            <option value="7.5" >1/16</option>
+                            <option value="3.75" >1/32</option>
+                            <option value="1.875" >1/64</option>
+                        </select>
                     </Col>
                     <hr />
                 </Row>
