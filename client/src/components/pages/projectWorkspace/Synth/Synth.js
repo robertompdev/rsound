@@ -26,7 +26,7 @@ class Synth extends Component {
             sustainMax: 0.05,
             volume: 1,
             wave: 'sawtooth',
-            selectedResolution: 7.5,
+            selectedResolution: 15,
             step: 0
         }
     }
@@ -155,7 +155,7 @@ class Synth extends Component {
                     </Col>
                     <Col md={2}>
                         <h4>Step Length</h4>
-                        <select className="form-control" onChange={this.handleResolutionChanged} defaultValue="7.5">
+                        <select className="form-control" onChange={this.handleResolutionChanged} defaultValue="15">
                             <option value="120" >1/1</option>
                             <option value="60" >1/2</option>
                             <option value="30" >1/4</option>

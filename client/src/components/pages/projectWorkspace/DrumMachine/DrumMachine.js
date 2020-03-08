@@ -14,13 +14,10 @@ class DrumMachine extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            selectedResolution: 7.5,
+            selectedResolution: 15,
             volume: 1,
             step: 0,
-            bdSeq: ["BD", "NoNote", "NoNote", "NoNote", "BD", "NoNote", "NoNote", "NoNote", "BD", "NoNote", "NoNote", "NoNote", "BD", "NoNote", "NoNote", "NoNote", "BD", "NoNote", "NoNote", "NoNote", "BD", "NoNote", "NoNote", "NoNote", "BD", "NoNote", "NoNote", "NoNote", "BD", "NoNote", "NoNote", "NoNote", "NoNote", "BD", "BD"],
-            snSeq: ["NoNote", "NoNote", "NoNote", "NoNote", "SN", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "SN", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "SN", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "SN", "NoNote", "NoNote", "NoNote"],
-            rtSeq: ["NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote"],
-            hhSeq: ["NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote", "NoNote"]
+            dmSeq: [["BD"], [], [], [], ["SN", "BD"], [], [], [], ["BD"], [], [], [], ["SN", "BD"], [], [], [], ["BD"], [], [], ["HH"]]
         }
     }
 
@@ -38,10 +35,16 @@ class DrumMachine extends Component {
 
     // Plays the note stored in the index array
     playSequence() {
+        let currentStepSouds = this.state.dmSeq[this.state.step]
         this.setState({ step: this.state.step + 1 })
-        if (this.state.step === 31) { this.setStepToZero() }
-        if (this.state.bdSeq[this.state.step] != "NoNote") { this.startDB() }
-        if (this.state.snSeq[this.state.step] != "NoNote") { this.startSN() }
+        this.state.step === 15 && this.setStepToZero()
+        if (currentStepSouds !== "") {
+            currentStepSouds.includes("BD") && this.startDB()
+            currentStepSouds.includes("SN") && this.startSN()
+            currentStepSouds.includes("HH") && this.startHH()
+            currentStepSouds.includes("RT") && this.startRT()
+        }
+
     }
 
     startDB() {
@@ -153,7 +156,6 @@ class DrumMachine extends Component {
                         <Button onClick={() => this.startSN()}>SN</Button>
                         <Button onClick={() => this.startRT()}>RT</Button>
                         <Button onClick={() => this.startHH()}>HH</Button>
-                        <Button onClick={() => this.playSequence()}>PLAY</Button>
                     </div>
                     <hr />
                 </Row>
