@@ -8,6 +8,7 @@ import './DrumMachine.css'
 
 /* --- components import --- */
 import Audio from './Audio'
+import MSC from './MatrixStepsCreation'
 
 class DrumMachine extends Component {
 
@@ -17,8 +18,15 @@ class DrumMachine extends Component {
             selectedResolution: 15,
             volume: 1,
             step: 0,
-            dmSeq: [["BD"], [], [], [], ["SN", "BD"], [], [], [], ["BD"], [], [], [], ["SN", "BD"], [], [], [], ["BD"], [], [], ["HH"]]
+            dmSeq: [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], []],
+            dbWav: new Audio(),
+            snWav: new Audio(),
+
         }
+    }
+
+    componentDidMount() {
+
     }
 
     // If parent matrix step property updates, then it plays next note from the sequence in the array
@@ -63,6 +71,13 @@ class DrumMachine extends Component {
 
         osc.start(time)
         osc.stop(time + 0.5)
+
+        // let bd = new Audio();
+        // bd.src = "./Samples/processed-kick-03.wav"
+        // console.log(bd)
+        // bd.play()
+
+
     }
 
     startRT() {
@@ -130,34 +145,65 @@ class DrumMachine extends Component {
         noiseEnvelope.gain.setValueAtTime(1, time)
         noiseEnvelope.gain.exponentialRampToValueAtTime(0.01, time + 0.2)
         noiseEnvelope.connect(audioContext.destination)
+    }
 
-        let osc = audioContext.createOscillator();
-        osc.type = 'triangle';
+    matrixCellOnClick = (e) => {
+        e = e || window.event
+        e = e.target || e.srcElement
 
-        let oscEnvelope = audioContext.createGain();
-        osc.connect(oscEnvelope);
+        let newSequence = [...this.state.dmSeq]
+        let stepNumber = parseInt(e.id.slice(-2)) - 1
+        let selectedKey = e.id.split('0')[0]
+        let selectedCell = document.getElementById(e.id)
 
-        osc.frequency.setValueAtTime(100, time);
-        oscEnvelope.gain.setValueAtTime(0.7, time);
-        oscEnvelope.gain.exponentialRampToValueAtTime(0.01, time + 0.1);
-        osc.start(time)
+        newSequence[stepNumber].push(selectedKey)
 
-        osc.stop(time + 0.2);
-        //noise.stop(time + 0.2);
-        oscEnvelope.connect(audioContext.destination);
+        if (selectedCell.className.includes('selected')) {
+            newSequence[stepNumber] = newSequence[stepNumber].filter(e => e !== selectedKey)
+            selectedCell.className = `key-note ${stepNumber + 1}`
+            selectedCell.style.background = "#FFE4D3"
+        } else {
+            newSequence[stepNumber] = selectedKey
+            selectedCell.className = `key-note ${stepNumber + 1} selected`
+            selectedCell.style.background = "#F16B24"
+            switch (selectedKey) {
+                case "HH":
+                    this.startHH()
+                    break;
+                case "SN":
+                    this.startSN()
+                    break;
+                case "RT":
+                    this.startRT()
+                    break;
+                case "DB":
+                    this.startDB()
+                    break;
+                default:
+                    break;
+            }
+        }
+        this.setState({ sequence: newSequence })
     }
 
     render() {
         return (
             <>
                 <Row>
-                    <div className="div-seq-drum">
-                        <Button onClick={() => this.startDB()}>BD</Button>
-                        <Button onClick={() => this.startSN()}>SN</Button>
-                        <Button onClick={() => this.startRT()}>RT</Button>
-                        <Button onClick={() => this.startHH()}>HH</Button>
-                    </div>
-                    <hr />
+                    <Col md={6}>
+                        <div className="bt-dm mb-20">
+                            <Button onClick={() => this.startDB()}>BD</Button>
+                            <Button onClick={() => this.startSN()}>SN</Button>
+                            <Button onClick={() => this.startRT()}>RT</Button>
+                            <Button onClick={() => this.startHH()}>HH</Button>
+                        </div>
+                    </Col>
+                    <Col md={11}>
+                        <div>
+                            <MSC matrixCellOnClick={() => this.matrixCellOnClick()} />
+                        </div>
+                        <hr />
+                    </Col>
                 </Row>
                 <Row>
                     <Col md={2}>

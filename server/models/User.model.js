@@ -5,7 +5,11 @@ const userSchema = new Schema({
     username: String,
     password: String,
     email: String,
-    imageUrl: String
+    imageUrl: String,
+    projects: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Project'
+    }]
 }, {
     timestamps: true
 })

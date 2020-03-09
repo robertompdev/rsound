@@ -47,18 +47,18 @@ class ProjectsList extends Component {
                         {this.props.loggedInUser && <Button className="mb-20" variant="dark" onClick={this.openModal}>Create project</Button>}
                     </Col>
                 </Row>
-                <div className="Row">
+                <Row>
                     {this.state.projects.length ? (
-                        <Row>
-                            {this.state.projects.map(elm => <ProjectCard key={elm._id} {...elm} />)}
-                        </Row>
+                        <>
+                            {this.state.projects.map(elm => <ProjectCard key={elm._id} {...elm} loggedInUser={this.props.loggedInUser} />)}
+                        </>
                     )
                         :
                         <div className="loading">
                             <div className="spinner-border"></div>
                         </div>
                     }
-                </div>
+                </Row>
                 <Modal show={this.state.showmodal} onHide={this.closeModal}>
                     <Modal.Body>
                         <h3 className="orange-text">New project</h3>

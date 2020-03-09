@@ -24,7 +24,7 @@ const Profile = props => {
                                         {props.loggedInUser.imageUrl ? <Card.Img variant="top" src={props.loggedInUser.imageUrl} /> : <div className="initial-letter">{props.loggedInUser.username.charAt(0)}</div>}
                                     </Col>
                                     <Col md={8} className="user-projects">
-                                        {props.loggedInUser.projects ? <p>{props.loggedInUser.projects}</p> : <p>It seems you haven't created your first project yet.</p>}
+                                        {props.loggedInUser._id ? <p>{props.loggedInUser.projects}</p> : <p>It seems you haven't created your first project yet.</p>}
                                     </Col>
                                 </Row>
                             </Card.Body>

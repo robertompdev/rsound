@@ -70,9 +70,6 @@ class Project extends Component {
                 <h3>Synth A</h3>
                 <Synth className="md-10" playStep={this.state.step} bpm={this.state.bpm} />
                 <hr />
-                <h3>Synth B</h3>
-                {/* <Synth playStep={this.state.step} /> */}
-                <hr />
                 <h3>Drum Machine</h3>
                 <DrumMachine playStep={this.state.step} bpm={this.state.bpm} />
             </Container >

@@ -19,7 +19,7 @@ class MSC extends Component {
     render() {
         return (
             <>
-                <div className="div-seq">
+                <div className="div-seq mb-20">
                     <Row className="no-gutters">
                         <div className="step-header">
                             Notes

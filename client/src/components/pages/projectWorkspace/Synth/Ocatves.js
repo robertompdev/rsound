@@ -8,7 +8,7 @@ class Octave extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            numberOfOctaves: [2, 1],
+            numberOfOctaves: [2, 1]
         }
     }
 
@@ -18,7 +18,6 @@ class Octave extends Component {
                 {this.state.numberOfOctaves.map((octave, idx) => <Key {...this.props} octave={octave} key={idx} />)}
             </>
         )
-
     }
 
 }
