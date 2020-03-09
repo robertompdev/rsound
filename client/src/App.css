@@ -3,6 +3,7 @@ body {
   font-weight: 200;
   background-color: #FAF9F9;
   color: #555B6E;
+  margin-top: 80px;
 }
 
 button{
@@ -27,7 +28,7 @@ h1 {
 }
 
 a, a:hover {
-    color: #FAF9F9;
+  color: #FAF9F9;
 }
 
 .container {
@@ -39,17 +40,18 @@ a, a:hover {
 }
 
 .navbar {
-    background-color: #71918F;
-    color: #FAF9F9;
-    padding: 0px;
-    padding-right: 20px;
+  background: rgb(250,249,249);
+  background: linear-gradient(90deg, rgba(250,249,249,1) 29%, rgba(113,145,143,1) 80%);
+  color: #FAF9F9;
+  padding: 0px;
+  padding-right: 20px;
 }
 
 .navbar-brand {
-   font-family: 'Julius Sans One', sans-serif;
-   font-size: 1.3em;
-   padding-left: 10px;
-   color: #F16B24;
+  font-family: 'Julius Sans One', sans-serif;
+  font-size: 1.3em;
+  padding-left: 10px;
+  color: #F16B24;
 }
 
 .btn{

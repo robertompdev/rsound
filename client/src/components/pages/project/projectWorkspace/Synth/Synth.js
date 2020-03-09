@@ -131,7 +131,7 @@ class Synth extends Component {
                     <Col md={2}>
                         {/* WAVE TYPE SELECTOR */}
                         <h4>Wave Type</h4>
-                        <select className="form-control" onChange={this.handleSelectionChanged} defaultValue="sawtooth">
+                        <select className="form-control" onChange={this.handleSelectionChanged} defaultValue={this.state.wave}>
                             <option value="sawtooth">Sawtooth</option>
                             <option value="sine">Sine</option>
                             <option value="square">Square</option>

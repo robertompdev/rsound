@@ -1,7 +1,7 @@
 .div-seq-drum{
-    height: 400px;
-    min-width: 300px;
-    overflow: scroll;   
+  height: 400px;
+  min-width: 300px;
+  overflow: scroll;   
 }
 
 .drum-note {

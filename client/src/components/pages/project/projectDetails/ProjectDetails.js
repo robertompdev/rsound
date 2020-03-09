@@ -28,6 +28,7 @@ class ProjectDetails extends Component {
     }
 
     render() {
+        console.log(this.state.project)
         return (
             <Container className="project-details">
                 <h1>Project Details</h1>
@@ -36,7 +37,7 @@ class ProjectDetails extends Component {
                         <Row>
                             <Col md={9}>
                                 <h2>{this.state.project.title}</h2>
-                                <p>Parameters:  {this.state.project.parameters}</p>
+                                <p>Description: {this.state.project.description}</p>
                             </Col>
                             <Col md={3}>
                                 <Card.Img variant="top" src={this.state.project.imageUrl} />

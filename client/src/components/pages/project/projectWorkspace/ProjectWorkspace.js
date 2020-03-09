@@ -16,7 +16,29 @@ class Project extends Component {
         super()
         this.state = {
             bpm: 120,
-            step: 1
+            step: 1,
+            synth1:
+            {
+                attack: { type: Number, default: 0 },
+                decay: { type: Number, default: 1 },
+                release: { type: Number, default: 0.15 },
+                sequence: Array,
+                sustain: { type: Number, default: 0.05 },
+                wave: { type: String, default: 'sawtooth' },
+                selectedResolution: { type: Number, default: 15 }
+            },
+            synth2: {
+                attack: { type: Number, default: 0 },
+                decay: { type: Number, default: 1 },
+                release: { type: Number, default: 0.15 },
+                sequence: Array,
+                sustain: { type: Number, default: 0.05 },
+                wave: { type: String, default: 'triangle' },
+                selectedResolution: { type: Number, default: 15 }
+            },
+            drumMachine: {
+                dmSeq: Array
+            },
         }
     }
 

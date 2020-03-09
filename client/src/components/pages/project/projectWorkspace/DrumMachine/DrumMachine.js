@@ -9,9 +9,12 @@ import './DrumMachine.css'
 /* --- components import --- */
 import Audio from './Parts/Audio'
 import MSC from './Parts/MatrixStepsCreation'
+
+/* --- audio files import --- */
 import audio1 from './Samples/processed-kick-03.wav'
 import audio2 from './Samples/processed-snare-04.wav'
 import audio3 from './Samples/warm-tube-closedhat-rr3.wav'
+import audio4 from './Samples/warm-tube-clap02-rr4.wav'
 
 class DrumMachine extends Component {
 
@@ -23,10 +26,6 @@ class DrumMachine extends Component {
             step: 0,
             dmSeq: [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], []],
         }
-    }
-
-    componentDidMount() {
-
     }
 
     // If parent matrix step property updates, then it plays next note from the sequence in the array
@@ -47,56 +46,37 @@ class DrumMachine extends Component {
         this.setState({ step: this.state.step + 1 })
         this.state.step === 15 && this.setStepToZero()
         if (currentStepSouds !== "") {
-            currentStepSouds.includes("BD") && this.startDB()
-            currentStepSouds.includes("SN") && this.startSN()
-            currentStepSouds.includes("HH") && this.startHH()
-            currentStepSouds.includes("RT") && this.startRT()
+            currentStepSouds.includes("BD") && this.startSample("BD")
+            currentStepSouds.includes("SN") && this.startSample("SN")
+            currentStepSouds.includes("HH") && this.startSample("HH")
+            currentStepSouds.includes("RT") && this.startSample("RT")
         }
-
     }
 
-    startDB() {
-        let bd = new Audio();
-        bd.src = "./Samples/processed-kick-03.wav"
+    startSample(sample) {
+        let file = new Audio()
         const audio = document.createElement("audio")
         audio.setAttribute("type", "audio/wav")
-        audio.setAttribute("src", audio1)
-        audio.play().then().catch(err => console.log({ err }))
-    }
-
-    startRT() {
-        let time = Audio.context.currentTime
-        let osc = Audio.context.createOscillator()
-        let gain = Audio.context.createGain()
-        osc = Audio.context.createOscillator()
-        osc.frequency.setValueAtTime(1500, time);
-        gain.gain.value = this.state.volume
-
-        osc.frequency.exponentialRampToValueAtTime(0.01, time + 0.5);
-        gain.gain.exponentialRampToValueAtTime(0.01, time + 0.5);
-
-        osc.connect(gain) // Connect oscillator to gain
-        gain.connect(Audio.context.destination) // Connect gain to output
-
-        osc.start(time)
-        osc.stop(time + 0.5)
-    }
-
-    startHH() {
-        let bd = new Audio();
-        bd.src = "./Samples/warm-tube-closedhat-rr3.wav"
-        const audio = document.createElement("audio")
-        audio.setAttribute("type", "audio/wav")
-        audio.setAttribute("src", audio3)
-        audio.play().then().catch(err => console.log({ err }))
-    }
-
-    startSN() {
-        let bd = new Audio();
-        bd.src = "./Samples/snare-04.wav"
-        const audio = document.createElement("audio")
-        audio.setAttribute("type", "audio/wav")
-        audio.setAttribute("src", audio2)
+        switch (sample) {
+            case "BD":
+                file.src = "./Samples/processed-kick-03.wav"
+                audio.setAttribute("src", audio1)
+                break;
+            case "HH":
+                file.src = "./Samples/warm-tube-closedhat-rr3.wav"
+                audio.setAttribute("src", audio3)
+                break;
+            case "SN":
+                file.src = "./Samples/snare-04.wav"
+                audio.setAttribute("src", audio2)
+                break;
+            case "RT":
+                file.src = "./Samples/warm-tube-clap02-rr4.wav"
+                audio.setAttribute("src", audio4)
+                break;
+            default:
+                break;
+        }
         audio.play().then().catch(err => console.log({ err }))
     }
 
@@ -111,26 +91,26 @@ class DrumMachine extends Component {
 
         newSequence[stepNumber].push(selectedKey)
 
-        if (selectedCell.className.includes('selected')) {
+        if (selectedCell.className.includes('elected')) {
             newSequence[stepNumber] = newSequence[stepNumber].filter(e => e !== selectedKey)
-            selectedCell.className = `key-note ${stepNumber + 1}`
+            selectedCell.className = `drum-note ${stepNumber + 1}`
             selectedCell.style.background = "#FFE4D3"
         } else {
             newSequence[stepNumber] = selectedKey
-            selectedCell.className = `key-note ${stepNumber + 1} selected`
+            selectedCell.className = `drum-note ${stepNumber + 1} elected`
             selectedCell.style.background = "#F16B24"
             switch (selectedKey) {
                 case "HH":
-                    this.startHH()
+                    this.startSample("HH")
                     break;
                 case "SN":
-                    this.startSN()
+                    this.startSample("SN")
                     break;
                 case "RT":
-                    this.startRT()
+                    this.startSample("RT")
                     break;
                 case "DB":
-                    this.startDB()
+                    this.startSample("DB")
                     break;
                 default:
                     break;
@@ -145,10 +125,10 @@ class DrumMachine extends Component {
                 <Row>
                     <Col md={6}>
                         <div className="bt-dm mb-20">
-                            <Button onClick={() => this.startDB()}>BD</Button>
-                            <Button onClick={() => this.startSN()}>SN</Button>
-                            <Button onClick={() => this.startRT()}>RT</Button>
-                            <Button onClick={() => this.startHH()}>HH</Button>
+                            <Button onClick={() => this.startSample("BD")}>BD</Button>
+                            <Button onClick={() => this.startSample("SN")}>SN</Button>
+                            <Button onClick={() => this.startSample("RT")}>RT</Button>
+                            <Button onClick={() => this.startSample("HH")}>HH</Button>
                         </div>
                     </Col>
                     <Col md={11}>

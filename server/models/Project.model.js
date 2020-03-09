@@ -7,35 +7,29 @@ const projectSchema = new Schema({
     bpm: Number,
     synth1:
     {
-        attack: Number,
-        decay: Number,
-        release: Number,
+        attack: { type: Number, default: 0 },
+        decay: { type: Number, default: 1 },
+        release: { type: Number, default: 0.15 },
         sequence: Array,
-        sustain: Number,
-        sustainMax: Number,
-        volume: Number,
-        wave: String,
-        selectedResolution: Number,
+        sustain: { type: Number, default: 0.05 },
+        wave: { type: String, default: 'sawtooth' },
+        selectedResolution: { type: Number, default: 15 }
     },
     synth2: {
-        attack: Number,
-        decay: Number,
-        release: Number,
+        attack: { type: Number, default: 0 },
+        decay: { type: Number, default: 1 },
+        release: { type: Number, default: 0.15 },
         sequence: Array,
-        sustain: Number,
-        sustainMax: Number,
-        volume: Number,
-        wave: String,
-        selectedResolution: Number,
+        sustain: { type: Number, default: 0.05 },
+        wave: { type: String, default: 'triangle' },
+        selectedResolution: { type: Number, default: 15 }
     },
     drumMachine: {
-        selectedResolution: Number,
-        volume: Number,
-        dmSeq: Array,
+        dmSeq: Array
     },
 
     imageUrl: String,
-    autor: { type: Schema.ObjectId, ref: 'User' },
+    autor: { type: Schema.ObjectId, ref: 'User' }
 }, {
     timestamps: true
 })
