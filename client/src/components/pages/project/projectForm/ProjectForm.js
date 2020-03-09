@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 
-import ProjectsServices from '../../../services/project.services'
+import ProjectsServices from '../../../../services/project.services'
 
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
-import FilesServices from '../../../services/files.services'
+import FilesServices from '../../../../services/files.services'
 
 class ProjectForm extends Component {
 
@@ -70,10 +70,6 @@ class ProjectForm extends Component {
                 <Form.Group>
                     <Form.Label>Description</Form.Label>
                     <Form.Control type="text" name="description" value={this.state.project.description} onChange={this.handleChange} />
-                </Form.Group>
-                <Form.Group>
-                    <Form.Label>Parameters</Form.Label>
-                    <Form.Control type="text" name="parameters" value={this.state.project.length} onChange={this.handleChange} />
                 </Form.Group>
                 <Form.Group>
                     <Form.Label>Image</Form.Label>

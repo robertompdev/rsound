@@ -7,8 +7,11 @@ import Button from 'react-bootstrap/Button'
 import './DrumMachine.css'
 
 /* --- components import --- */
-import Audio from './Audio'
-import MSC from './MatrixStepsCreation'
+import Audio from './Parts/Audio'
+import MSC from './Parts/MatrixStepsCreation'
+import audio1 from './Samples/processed-kick-03.wav'
+import audio2 from './Samples/processed-snare-04.wav'
+import audio3 from './Samples/warm-tube-closedhat-rr3.wav'
 
 class DrumMachine extends Component {
 
@@ -19,9 +22,6 @@ class DrumMachine extends Component {
             volume: 1,
             step: 0,
             dmSeq: [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], []],
-            dbWav: new Audio(),
-            snWav: new Audio(),
-
         }
     }
 
@@ -56,28 +56,12 @@ class DrumMachine extends Component {
     }
 
     startDB() {
-        let time = Audio.context.currentTime
-        let osc = Audio.context.createOscillator()
-        let gain = Audio.context.createGain()
-        osc = Audio.context.createOscillator()
-        osc.frequency.setValueAtTime(150, time);
-        gain.gain.value = this.state.volume
-
-        osc.frequency.exponentialRampToValueAtTime(0.01, time + 0.5);
-        gain.gain.exponentialRampToValueAtTime(0.01, time + 0.5);
-
-        osc.connect(gain) // Connect oscillator to gain
-        gain.connect(Audio.context.destination) // Connect gain to output
-
-        osc.start(time)
-        osc.stop(time + 0.5)
-
-        // let bd = new Audio();
-        // bd.src = "./Samples/processed-kick-03.wav"
-        // console.log(bd)
-        // bd.play()
-
-
+        let bd = new Audio();
+        bd.src = "./Samples/processed-kick-03.wav"
+        const audio = document.createElement("audio")
+        audio.setAttribute("type", "audio/wav")
+        audio.setAttribute("src", audio1)
+        audio.play().then().catch(err => console.log({ err }))
     }
 
     startRT() {
@@ -99,52 +83,21 @@ class DrumMachine extends Component {
     }
 
     startHH() {
-        let time = Audio.context.currentTime
-        let osc = Audio.context.createOscillator()
-        let gain = Audio.context.createGain()
-        osc = Audio.context.createOscillator()
-        osc.frequency.setValueAtTime(6000, time);
-        gain.gain.value = this.state.volume
-
-        osc.frequency.exponentialRampToValueAtTime(0.06, time + 0.05);
-        gain.gain.exponentialRampToValueAtTime(0.02, time + 0.1);
-
-        osc.connect(gain) // Connect oscillator to gain
-        gain.connect(Audio.context.destination) // Connect gain to output
-
-        osc.start(time)
-        osc.stop(time + 0.05)
+        let bd = new Audio();
+        bd.src = "./Samples/warm-tube-closedhat-rr3.wav"
+        const audio = document.createElement("audio")
+        audio.setAttribute("type", "audio/wav")
+        audio.setAttribute("src", audio3)
+        audio.play().then().catch(err => console.log({ err }))
     }
 
     startSN() {
-        let audioContext = Audio.context
-        let time = audioContext.currentTime
-        let node = audioContext.createBufferSource(),
-            buffer = audioContext.createBuffer(1, 4096, audioContext.sampleRate),
-            data = buffer.getChannelData(0);
-
-        for (var i = 0; i < 4096; i++) {
-            data[i] = Math.random();
-        }
-
-        node.buffer = buffer;
-        node.loop = true;
-        node.start(time)
-        node.stop(time + 0.2)
-        node.connect(audioContext.destination)
-
-        let filter = audioContext.createBiquadFilter()
-        filter.type = "highpass"
-
-        filter.frequency.setValueAtTime(100, time)
-        filter.frequency.linearRampToValueAtTime(1000, time + 1)
-
-        let noiseEnvelope = audioContext.createGain()
-        filter.connect(noiseEnvelope);
-
-        noiseEnvelope.gain.setValueAtTime(1, time)
-        noiseEnvelope.gain.exponentialRampToValueAtTime(0.01, time + 0.2)
-        noiseEnvelope.connect(audioContext.destination)
+        let bd = new Audio();
+        bd.src = "./Samples/snare-04.wav"
+        const audio = document.createElement("audio")
+        audio.setAttribute("type", "audio/wav")
+        audio.setAttribute("src", audio2)
+        audio.play().then().catch(err => console.log({ err }))
     }
 
     matrixCellOnClick = (e) => {

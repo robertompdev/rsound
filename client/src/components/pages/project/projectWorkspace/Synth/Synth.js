@@ -6,11 +6,11 @@ import Row from 'react-bootstrap/Row'
 import './Synth.css'
 
 /* --- json data import --- */
-import octavesJson from '../../../data/notesSimplified.json'
+import octavesJson from '../../../../../../src/components/data/notesSimplified.json'
 
 /* --- components import --- */
-import MSC from './MatrixStepsCreation'
-import Audio from './Audio'
+import MSC from './Parts/MatrixStepsCreation'
+import Audio from './Parts/Audio'
 
 class Synth extends Component {
 

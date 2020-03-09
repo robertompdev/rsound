@@ -38,10 +38,8 @@ class Project extends Component {
     }
 
     stopSeq() {
-        for (let i = 0; i < 100; i++) {
-            window.clearInterval(i)
-            this.setState({ step: 0 })
-        }
+        for (var i = 1; i < 99999; i++)
+            window.clearInterval(i);
     }
 
     render() {
@@ -53,18 +51,18 @@ class Project extends Component {
                     </Col>
                 </Row>
                 <Row>
-                    <Col md={6}>
+                    <Col md={4}>
                         <Button className="transport m-10" variant="light" type="submit" onClick={() => this.playSeq()} >Play</Button>
                         <Button className="transport m-10" variant="light" type="submit" onClick={() => this.stopSeq()} >Stop</Button>
                     </Col >
-                    <Col md={6}>
+                    <Col md={4}>
                         <h4>Tempo {this.state.bpm} BPM's</h4>
                         <input name="bpm" className="bpm-slider m-10" type="range" min="50" max="240" step="1" defaultValue={this.state.bpm}
                             onChange={this.onChange} />
                     </Col>
-                    {/* <Col md={3}>
-                        <h4>Swing</h4>
-                    </Col> */}
+                    <Col md={4}>
+                        <Button className="transport m-10" variant="light" type="submit" >Save Changes</Button>
+                    </Col>
                 </Row>
                 <hr />
                 <h3>Synth A</h3>

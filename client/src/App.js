@@ -8,8 +8,8 @@ import './App.css'
 import { Switch, Route, Redirect } from 'react-router-dom'
 
 /* --- components import --- */
-import ProjectsList from './components/pages/projectsList/ProjectsList'
-import ProjectDetails from './components/pages/projectDetails/ProjectDetails'
+import ProjectsList from './components/pages/project/projectsList/ProjectsList'
+import ProjectDetails from './components/pages/project/projectDetails/ProjectDetails'
 
 import NavBar from './components/ui/NavBar'
 
@@ -28,7 +28,6 @@ class App extends Component {
     this.authServices = new AuthServices()
   }
 
-  //componentDidUpdate = (prevProps, prevState) => console.log("El estado de App se ha actualizado:", this.state)
   componentDidMount = () => this.fetchUser()
 
   setTheUser = userObj => this.setState({ loggedInUser: userObj })

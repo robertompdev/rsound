@@ -10,7 +10,7 @@ import Row from 'react-bootstrap/Row'
 import './ProjectCard.css'
 
 /* --- services import --- */
-import AuthServices from '../../../services/auth.services'
+import AuthServices from '../../../../services/auth.services'
 
 /* --- react-router-dom import --- */
 import { Link } from 'react-router-dom'

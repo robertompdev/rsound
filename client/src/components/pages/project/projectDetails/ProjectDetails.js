@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 /* --- components import --- */
-import Services from '../../../services/project.services'
+import Services from '../../../../services/project.services'
 import Project from '../projectWorkspace/ProjectWorkspace'
 
 /* --- styling import --- */

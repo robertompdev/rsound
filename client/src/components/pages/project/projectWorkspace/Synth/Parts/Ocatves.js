@@ -8,7 +8,7 @@ class Octave extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            numberOfOctaves: [2, 1]
+            numberOfOctaves: [3, 2]
         }
     }
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import './DrumMachine.css'
+import '../DrumMachine.css'
 
 class Key extends Component {
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 /* --- services import --- */
-import ProjectsServices from '../../../services/project.services'
+import ProjectsServices from '../../../../services/project.services'
 
 /* --- components import --- */
 import ProjectForm from '../projectForm/ProjectForm'

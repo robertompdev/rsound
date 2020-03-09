@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import './Synth.css'
+import '../Synth.css'
 
 class Key extends Component {
 

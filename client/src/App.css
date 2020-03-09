@@ -70,10 +70,12 @@ small .nav-link{
 .loading{
   text-align: center;
 }
+
 .spinner-border {
   color: #F16B24;
-  left: 0px;
-  top: 0px;
+  position: absolute;
+  left: 50%;
+  top: 35%;
 }
 
 .auth-div {

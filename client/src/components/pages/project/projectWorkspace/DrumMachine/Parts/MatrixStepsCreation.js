@@ -33,7 +33,8 @@ class MSC extends Component {
                         {this.state.numberOfSteps.map((step, idx) => <Col className="step-col" key={idx}><Keys {...this.props} step={step} /></Col>)}
                     </Row>
                 </div>
-            </>)
+            </>
+        )
     }
 }
 
