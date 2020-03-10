@@ -21,8 +21,8 @@ router.post('/new', (req, res, next) => {
         .catch(err => console.log(err))
 })
 
-router.post('/save/:id', (req, res, next) => {
-    Project.findfindByIdAndUpdate(req.params.id, { $set: { title: 'jason bourne' } }, { new: true, upsert: true })
+router.put('/save/:id', (req, res, next) => {
+    Project.findByIdAndUpdate(req.params.id, { $set: { title: 'jason bourne' } }, { new: true, upsert: true })
         .then(theProject => { res.json(theProject) })
         .catch(err => console.log(err))
 })
