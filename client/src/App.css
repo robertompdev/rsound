@@ -7,7 +7,7 @@ body {
 }
 
 button{
-  margin: 20px,
+  margin: 20px;
 }
 
 h1, h2, h3, h4 {
@@ -32,26 +32,7 @@ a, a:hover {
 }
 
 .container {
-  margin-top: 40px
-}
-
-.card-project{
-  margin-bottom: 40px;
-}
-
-.navbar {
-  background: rgb(250,249,249);
-  background: linear-gradient(90deg, rgba(250,249,249,1) 29%, rgba(113,145,143,1) 80%);
-  color: #FAF9F9;
-  padding: 0px;
-  padding-right: 20px;
-}
-
-.navbar-brand {
-  font-family: 'Julius Sans One', sans-serif;
-  font-size: 1.3em;
-  padding-left: 10px;
-  color: #F16B24;
+  margin-top: 40px;
 }
 
 .btn{
@@ -111,45 +92,4 @@ small .nav-link{
   text-align: center;
   display: flex;
   align-items: center;
-}
-
-.play {
-  display:inline-block;
-	margin:5px 5px 5px 10px;	
-	width: 0;
-	height: 0;
-	border-left: 50px solid #444;
-	border-top: 25px solid transparent;
-	border-bottom: 25px solid transparent;
-	border-right: 0;
-	text-indent: -9999px;
-}
-.stop {
-	display:inline-block;
-	background: #444;
-	border: 0;
-	margin:5px;	
-	width: 50px;
-	height: 50px;
-	text-indent: -9999px;
-}
-.play:hover, .stop:hover {
-	cursor:pointer;
-	opacity:0.8;
-}
-.play:active {
-  display:inline-block;
-	margin:5px 5px 5px 10px;	
-	width: 0;
-	height: 0;
-	border-left: 50px solid #f33;
-	border-top: 25px solid transparent;
-	border-bottom: 25px solid transparent;
-	border-right: 0;
-	text-indent: -9999px;
-}
-.stop:active {
-	background: #f33;
-	cursor:pointer;
-	opacity:1;
 }

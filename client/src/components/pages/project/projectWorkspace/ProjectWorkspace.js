@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 
+/*--- Import services ---*/
+import ProjectsServices from '../../../../services/project.services'
+
 /* --- components import --- */
 import Synth from './Synth/Synth'
 import DrumMachine from './DrumMachine/DrumMachine'
@@ -7,38 +10,24 @@ import DrumMachine from './DrumMachine/DrumMachine'
 /* --- styling import --- */
 import Button from 'react-bootstrap/Button'
 import Col from 'react-bootstrap/Col'
-import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 
 class Project extends Component {
 
     constructor() {
         super()
+        this.projectServices = new ProjectsServices()
         this.state = {
             bpm: 120,
             step: 1,
-            synth1:
-            {
-                attack: { type: Number, default: 0 },
-                decay: { type: Number, default: 1 },
-                release: { type: Number, default: 0.15 },
-                sequence: Array,
-                sustain: { type: Number, default: 0.05 },
-                wave: { type: String, default: 'sawtooth' },
-                selectedResolution: { type: Number, default: 15 }
-            },
-            synth2: {
-                attack: { type: Number, default: 0 },
-                decay: { type: Number, default: 1 },
-                release: { type: Number, default: 0.15 },
-                sequence: Array,
-                sustain: { type: Number, default: 0.05 },
-                wave: { type: String, default: 'triangle' },
-                selectedResolution: { type: Number, default: 15 }
-            },
-            drumMachine: {
-                dmSeq: Array
-            },
+            attack: 0,
+            decay: 1,
+            release: 0.15,
+            sequence: [],
+            sustain: 0.05,
+            wave: 'sawtooth',
+            selectedResolution: 15,
+            dmSeq: []
         }
     }
 
@@ -50,6 +39,7 @@ class Project extends Component {
         })
     }
 
+    // Interval starts
     playSeq() {
         let i = 0
         setInterval(() => {
@@ -59,14 +49,31 @@ class Project extends Component {
         }, 1000 / this.state.bpm)
     }
 
+    // Interval stopped and cleared
     stopSeq() {
         for (var i = 1; i < 99999; i++)
-            window.clearInterval(i);
+            window.clearInterval(i)
+    }
+
+    // Unpdate drum machne sequence from child component
+    handleToUpdateDM = (sequence) => {
+        this.setState({ dmSeq: sequence })
+    }
+
+    // Unpdate synth sequence from child component
+    handleToUpdateSynth = (sequence, release, sustain, wave, selectedResolution) => {
+        this.setState({ sequence: sequence, release: release, sustain: sustain, wave: wave, selectedResolution: selectedResolution })
+    }
+
+    saveProject = () => {
+        this.projectServices.saveProject(this.state)
+            .then(() => console.log(this.state))
+            .catch(err => console.log(err))
     }
 
     render() {
         return (
-            <Container>
+            <>
                 <Row>
                     <Col md={12}>
                         <h2>Transport</h2>
@@ -83,16 +90,16 @@ class Project extends Component {
                             onChange={this.onChange} />
                     </Col>
                     <Col md={4}>
-                        <Button className="transport m-10" variant="light" type="submit" >Save Changes</Button>
+                        <Button className="transport m-10" variant="light" type="submit" onClick={this.saveProject()}>Save Changes</Button>
                     </Col>
                 </Row>
                 <hr />
                 <h3>Synth A</h3>
-                <Synth className="md-10" playStep={this.state.step} bpm={this.state.bpm} />
+                <Synth className="md-10" playStep={this.state.step} bpm={this.state.bpm} handleToUpdateSynth={this.handleToUpdateSynth} />
                 <hr />
                 <h3>Drum Machine</h3>
-                <DrumMachine playStep={this.state.step} bpm={this.state.bpm} />
-            </Container >
+                <DrumMachine playStep={this.state.step} bpm={this.state.bpm} handleToUpdateDM={this.handleToUpdateDM} />
+            </>
         )
     }
 }

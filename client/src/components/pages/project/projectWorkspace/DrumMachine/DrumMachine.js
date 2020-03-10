@@ -120,6 +120,7 @@ class DrumMachine extends Component {
     }
 
     render() {
+        let handleToUpdateDM = this.props.handleToUpdateDM
         return (
             <>
                 <Row>
@@ -131,12 +132,14 @@ class DrumMachine extends Component {
                             <Button onClick={() => this.startSample("HH")}>HH</Button>
                         </div>
                     </Col>
-                    <Col md={11}>
-                        <div>
-                            <MSC matrixCellOnClick={() => this.matrixCellOnClick()} />
-                        </div>
-                        <hr />
-                    </Col>
+
+                    <div>
+                        <MSC matrixCellOnClick={() => {
+                            this.matrixCellOnClick()
+                            handleToUpdateDM(this.state.dmSeq)
+                        }} />
+                    </div>
+
                 </Row>
                 <Row>
                     <Col md={2}>

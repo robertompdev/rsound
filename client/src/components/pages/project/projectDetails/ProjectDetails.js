@@ -28,7 +28,6 @@ class ProjectDetails extends Component {
     }
 
     render() {
-        console.log(this.state.project)
         return (
             <Container className="project-details">
                 <h1>Project Details</h1>

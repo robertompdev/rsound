@@ -114,6 +114,7 @@ class Synth extends Component {
     }
 
     render() {
+        let handleToUpdateSynth = this.props.handleToUpdateSynth
         return (
             <>
                 <Row>
@@ -121,9 +122,12 @@ class Synth extends Component {
                     <Col md={12}>
                         <h4>Pattern Sequencer</h4>
                     </Col>
-
                     <div className="div-seq">
-                        <MSC matrixCellOnClick={() => this.matrixCellOnClick()} />
+                        <MSC matrixCellOnClick={() => {
+                            this.matrixCellOnClick()
+                            handleToUpdateSynth(this.state.sequence, this.state.release, this.state.sustain, this.state.wave, this.state.selectedResolution)
+                        }
+                        } />
                     </div>
                     <hr />
                 </Row>
@@ -137,7 +141,6 @@ class Synth extends Component {
                             <option value="square">Square</option>
                             <option value="triangle">Triangle</option>
                         </select>
-                        <hr />
                         {/* VOLUME CONTROL */}
                         <h4>Volume {Number.parseInt(this.state.volume * 100)}</h4>
                         <input name="volume" className="volume-slider" type="range" min="0" max="1" step="0.01" defaultValue={this.state.volume}

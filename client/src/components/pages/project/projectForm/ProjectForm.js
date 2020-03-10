@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 
+/*--- Import Services ---*/
 import ProjectsServices from '../../../../services/project.services'
+import FilesServices from '../../../../services/files.services'
 
+/*--- Import Styling ---*/
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-
-import FilesServices from '../../../../services/files.services'
 
 class ProjectForm extends Component {
 
@@ -60,7 +61,6 @@ class ProjectForm extends Component {
     }
 
     render() {
-
         return (
             <Form onSubmit={this.handleSubmit}>
                 <Form.Group>
@@ -76,7 +76,6 @@ class ProjectForm extends Component {
                     <Form.Control type="file" name="imageUrl" onChange={this.handleFileUpload} />
                     {/* <Form.Control type="text" name="imageUrl" value={this.state.project.imageUrl} onChange={this.handleChange} /> */}
                 </Form.Group>
-
                 <Button variant="dark" type="submit">Create new project</Button>
             </Form>
         )

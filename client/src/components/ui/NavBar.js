@@ -4,6 +4,8 @@ import React, { Component } from 'react'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 
+import './NavBar.css'
+
 /* --- services import --- */
 import AuthServices from '../../services/auth.services'
 
