@@ -74,10 +74,8 @@ class Project extends Component {
     }
 
     saveProject = () => {
-        // console.log(this.props)
-        this.projectServices.saveProject(this.props.id, this.state)
-            .then(theProject => console.log(theProject))
-            .then(() => alert('éxito'))
+        this.projectServices.saveProject(this.props.projectId, this.state)
+            .then(theProject => console.log('put', theProject))
             .catch(err => console.log(err))
     }
 
@@ -102,7 +100,7 @@ class Project extends Component {
                             onChange={this.onChange} />
                     </Col>
                     <Col md={4}>
-                        <Button className="transport m-10" variant="light" type="submit" id={this.props.id} onClick={this.queEsProps}>Save Changes</Button>
+                        <Button className="transport m-10" variant="light" type="submit" id={this.props.id} onClick={this.saveProject}>Save Changes</Button>
                     </Col>
                 </Row>
                 <hr />

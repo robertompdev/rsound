@@ -101,7 +101,7 @@ class Synth extends Component {
         for (let i = 0; i < restOfKeys.length; i++) { restOfKeys[i].style.backgroundColor = "#FFE4D3" }
 
         if (selectedCell.className.includes('selected')) {
-            newSequence[stepNumber] = ""
+            newSequence[stepNumber] = "NoNote"
             selectedCell.className = `key-note ${stepNumber + 1}`
         } else {
             newSequence[stepNumber] = selectedKey
