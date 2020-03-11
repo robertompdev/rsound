@@ -30,8 +30,6 @@ class ProjectCard extends Component {
         this.services = new AuthServices()
     }
 
-    componentDidMount = () => { console.log(this.state.userId, this.state.projectId) }
-
     closeModal = () => this.setState({ showmodal: false })
     openModal = () => this.setState({ showmodal: true })
     //queEsProps = () => console.log(this.props)
