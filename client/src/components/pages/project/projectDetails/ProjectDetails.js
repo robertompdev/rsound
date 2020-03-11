@@ -19,7 +19,9 @@ class ProjectDetails extends Component {
         this.services = new Services()
     }
 
-    componentDidMount = () => this.getProjectsDetails()
+    componentDidMount = () => {
+        this.getProjectsDetails()
+    }
 
     getProjectsDetails = () => {
         this.services.getProjectsDetails(this.props.match.params.id)
@@ -45,7 +47,7 @@ class ProjectDetails extends Component {
                         <hr></hr>
                         <Row>
                             <Col md={12}>
-                                <Project />
+                                <Project projectId={this.props.match.params.id} userId={this.props.location.state.userId} />
                             </Col>
                         </Row>
                     </Card.Body>

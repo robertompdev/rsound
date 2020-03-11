@@ -16,7 +16,7 @@ import './ProjectCard.css'
 import AuthServices from '../../../../services/auth.services'
 
 /* --- react-router-dom import --- */
-import { Link, Route } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 class ProjectCard extends Component {
 
@@ -47,8 +47,12 @@ class ProjectCard extends Component {
                         {this.props.loggedInUser ?
                             <>
                                 <Button as="div" className="mb-20" variant="dark" size="sm">
-                                    <Route path={`/details/:${this.state.projectId}/:${this.state.userId}`} component={ProjectDetails} >Route</Route>
-                                    <Link to={`/details/${this.state.projectId}/${this.state.userId}`} render={props => { return <ProjectDetails {...props} /> }}>Details</Link>
+                                    <Link
+                                        to={{ pathname: `/details/${this.state.projectId}/${this.state.userId}`, state: { projectId: this.state.projectId, userId: this.state.userId } }}
+                                        render={props => {
+                                            return <ProjectDetails {...props} />;
+                                        }}
+                                    >Details</Link>
                                 </Button>
                             </>
                             :
