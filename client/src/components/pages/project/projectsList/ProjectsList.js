@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 
 /* --- services import --- */
 import ProjectsServices from '../../../../services/project.services'
-import AuthServices from '../../../../services/auth.services'
 
 /* --- components import --- */
 import ProjectForm from '../projectForm/ProjectForm'
@@ -28,7 +27,6 @@ class ProjectsList extends Component {
 
     componentDidMount = () => {
         this.getAllProjects()
-        console.log(this.props)
     }
 
     getAllProjects = () => {

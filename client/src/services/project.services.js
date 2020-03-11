@@ -10,7 +10,7 @@ export default class Services {
     }
 
     getAllProjects = () => this.service.get('/getAllProjects').then(response => response.data)
-    getProjectsDetails = id => this.service.get(`/getOneProject/${id}`).then(response => response.data)
+    getProjectsDetails = (id, userId) => this.service.get(`/getOneProject/${id}/${userId}`).then(response => response.data)
     postProject = project => this.service.post(`/new`, project).then(response => response.data)
     saveProject = (id, project) => this.service.put(`/save/${id}`, project).then(response => response.data)
 }

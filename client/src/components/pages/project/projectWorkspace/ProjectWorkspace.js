@@ -12,6 +12,9 @@ import Button from 'react-bootstrap/Button'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 
+/* --- react-router-dom import --- */
+import { BrowserRouter as Router, Link, Route } from 'react-router-dom'
+
 class Project extends Component {
 
     constructor(props) {
@@ -82,7 +85,7 @@ class Project extends Component {
 
     render() {
         return (
-            <>
+            <Router>
                 <Row>
                     <Col md={12}>
                         <h2>Transport</h2>
@@ -108,7 +111,7 @@ class Project extends Component {
                 <hr />
                 <h3>Drum Machine</h3>
                 <DrumMachine playStep={this.state.step} bpm={this.state.bpm} handleToUpdateDM={this.handleToUpdateDM} />
-            </>
+            </Router>
         )
     }
 }

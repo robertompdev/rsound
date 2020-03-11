@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 
+/*--- components import ---*/
+import ProjectDetails from '../projectDetails/ProjectDetails'
+
 /* --- styling import --- */
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
@@ -13,19 +16,21 @@ import './ProjectCard.css'
 import AuthServices from '../../../../services/auth.services'
 
 /* --- react-router-dom import --- */
-import { Link } from 'react-router-dom'
+import { Link, Route } from 'react-router-dom'
 
 class ProjectCard extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
-            showmodal: false
+            showmodal: false,
+            userId: this.props.loggedInUser._id,
+            projectId: this.props._id
         }
         this.services = new AuthServices()
     }
 
-    componentDidMount = () => { console.log(this.props.loggedInUser._id, this.props._id) }
+    componentDidMount = () => { console.log(this.state.userId, this.state.projectId) }
 
     closeModal = () => this.setState({ showmodal: false })
     openModal = () => this.setState({ showmodal: true })
@@ -42,7 +47,8 @@ class ProjectCard extends Component {
                         {this.props.loggedInUser ?
                             <>
                                 <Button as="div" className="mb-20" variant="dark" size="sm">
-                                    <Link to={`/details/${this.props._id}`} projectId={this.props._id} userId={this.props.loggedInUser._id}>Details</Link>
+                                    <Route path={`/details/:${this.state.projectId}/:${this.state.userId}`} component={ProjectDetails} >Route</Route>
+                                    <Link to={`/details/${this.state.projectId}/${this.state.userId}`} render={props => { return <ProjectDetails {...props} /> }}>Details</Link>
                                 </Button>
                             </>
                             :
