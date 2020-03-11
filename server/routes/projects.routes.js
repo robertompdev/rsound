@@ -9,7 +9,7 @@ router.get('/getAllProjects', (req, res, next) => {
         .catch(err => console.log(err))
 })
 
-router.get('/getOneProject/:id', (req, res, next) => {
+router.get('/getOneProject/:id/:userid', (req, res, next) => {
     Project.findById(req.params.id)
         .then(theProject => res.json(theProject))
         .catch(err => console.log(err))
@@ -21,11 +21,12 @@ router.post('/new', (req, res, next) => {
         .catch(err => console.log(err))
 })
 
-router.post('/save/:id', (req, res, next) => {
-    Project.findfindByIdAndUpdate(req.params.id, { $set: { title: 'jason bourne' } }, { new: true, upsert: true })
+router.put('/save/:id/:userid', (req, res, next) => {
+    console.log(req.body)
+    Project.wherefindByIdAndUpdate(req.params.id, req.body, { new: true, upsert: true })
+        .then(theProject => console.log('editing Project', theProject))
         .then(theProject => { res.json(theProject) })
         .catch(err => console.log(err))
 })
-
 
 module.exports = router

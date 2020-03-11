@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
 
-/* --- styling import --- */
-import Navbar from 'react-bootstrap/Navbar'
-import Nav from 'react-bootstrap/Nav'
-
-import './NavBar.css'
-
 /* --- services import --- */
 import AuthServices from '../../services/auth.services'
 
 /* --- react-router-dom import --- */
 import { Link } from 'react-router-dom'
+
+/* --- styling import --- */
+import Navbar from 'react-bootstrap/Navbar'
+import Nav from 'react-bootstrap/Nav'
+
+import './NavBar.css'
 
 class Navigation extends Component {
 

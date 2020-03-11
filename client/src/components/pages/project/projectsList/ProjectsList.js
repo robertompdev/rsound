@@ -22,13 +22,15 @@ class ProjectsList extends Component {
             projects: [],
             showmodal: false
         }
-        this.services = new ProjectsServices()
+        this.ProjectServices = new ProjectsServices()
     }
 
-    componentDidMount = () => this.getAllProjects()
+    componentDidMount = () => {
+        this.getAllProjects()
+    }
 
     getAllProjects = () => {
-        this.services.getAllProjects()
+        this.ProjectServices.getAllProjects()
             .then(allProjects => {
                 this.setState({ projects: allProjects })
             })

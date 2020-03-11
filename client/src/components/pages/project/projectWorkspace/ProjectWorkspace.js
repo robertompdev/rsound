@@ -12,12 +12,16 @@ import Button from 'react-bootstrap/Button'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 
+/* --- react-router-dom import --- */
+import { BrowserRouter as Router, Link, Route } from 'react-router-dom'
+
 class Project extends Component {
 
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.projectServices = new ProjectsServices()
         this.state = {
+            user: {},
             bpm: 120,
             step: 1,
             attack: 0,
@@ -29,6 +33,10 @@ class Project extends Component {
             selectedResolution: 15,
             dmSeq: []
         }
+    }
+
+    componentDidMount = () => {
+        console.log(this.props)
     }
 
     // Wave type selector updates 'wave' property in state
@@ -66,14 +74,18 @@ class Project extends Component {
     }
 
     saveProject = () => {
-        this.projectServices.saveProject(this.state)
-            .then(() => console.log(this.state))
+        // console.log(this.props)
+        this.projectServices.saveProject(this.props.id, this.state)
+            .then(theProject => console.log(theProject))
+            .then(() => alert('éxito'))
             .catch(err => console.log(err))
     }
 
+    queEsProps = () => console.log(this.props)
+
     render() {
         return (
-            <>
+            <Router>
                 <Row>
                     <Col md={12}>
                         <h2>Transport</h2>
@@ -90,7 +102,7 @@ class Project extends Component {
                             onChange={this.onChange} />
                     </Col>
                     <Col md={4}>
-                        <Button className="transport m-10" variant="light" type="submit" onClick={this.saveProject()}>Save Changes</Button>
+                        <Button className="transport m-10" variant="light" type="submit" id={this.props.id} onClick={this.queEsProps}>Save Changes</Button>
                     </Col>
                 </Row>
                 <hr />
@@ -99,7 +111,7 @@ class Project extends Component {
                 <hr />
                 <h3>Drum Machine</h3>
                 <DrumMachine playStep={this.state.step} bpm={this.state.bpm} handleToUpdateDM={this.handleToUpdateDM} />
-            </>
+            </Router>
         )
     }
 }

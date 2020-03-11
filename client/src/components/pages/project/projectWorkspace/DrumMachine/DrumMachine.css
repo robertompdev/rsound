@@ -7,7 +7,7 @@
 .drum-note {
   border:solid 0.2px white;
   background-color: #FFE4D3;
-  height: 10px;
+  height: 20px;
   min-width: 50px;
   font-size: 0.5em;
   text-align: center;
@@ -16,6 +16,7 @@
 .step-header {
   border:solid 0.2px white;
   background-color: #555B6E;
+  height: 20px;
   color: white;
   min-width: 50px;
   text-align: center;
