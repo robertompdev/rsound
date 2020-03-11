@@ -47,7 +47,7 @@ class ProjectDetails extends Component {
                         <hr></hr>
                         <Row>
                             <Col md={12}>
-                                <Project projectId={this.props.match.params.id} userId={this.props.location.state.userId} />
+                                <Project projectId={this.props.match.params.id} userId={this.props.location.state.userId} title={this.state.project.title} description={this.state.project.description} />
                             </Col>
                         </Row>
                     </Card.Body>
