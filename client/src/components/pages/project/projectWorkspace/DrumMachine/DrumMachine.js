@@ -49,7 +49,7 @@ class DrumMachine extends Component {
             currentStepSouds.includes("BD") && this.startSample("BD")
             currentStepSouds.includes("SN") && this.startSample("SN")
             currentStepSouds.includes("HH") && this.startSample("HH")
-            currentStepSouds.includes("RT") && this.startSample("RT")
+            currentStepSouds.includes("CP") && this.startSample("CP")
         }
     }
 
@@ -70,7 +70,7 @@ class DrumMachine extends Component {
                 file.src = "./Samples/snare-04.wav"
                 audio.setAttribute("src", audio2)
                 break;
-            case "RT":
+            case "CP":
                 file.src = "./Samples/warm-tube-clap02-rr4.wav"
                 audio.setAttribute("src", audio4)
                 break;
@@ -92,9 +92,11 @@ class DrumMachine extends Component {
         newSequence[stepNumber].push(selectedKey)
 
         if (selectedCell.className.includes('elected')) {
-            newSequence[stepNumber] = newSequence[stepNumber].filter(e => e !== selectedKey)
+            console.log(selectedKey)
+            newSequence[stepNumber] = [...newSequence[stepNumber].filter(e => e !== selectedKey)]
             selectedCell.className = `drum-note ${stepNumber + 1}`
             selectedCell.style.background = "#FFE4D3"
+            console.log(newSequence[stepNumber])
         } else {
             newSequence[stepNumber] = selectedKey
             selectedCell.className = `drum-note ${stepNumber + 1} elected`
@@ -106,8 +108,8 @@ class DrumMachine extends Component {
                 case "SN":
                     this.startSample("SN")
                     break;
-                case "RT":
-                    this.startSample("RT")
+                case "CP":
+                    this.startSample("CP")
                     break;
                 case "DB":
                     this.startSample("DB")
@@ -128,7 +130,7 @@ class DrumMachine extends Component {
                         <div className="bt-dm mb-20">
                             <Button onClick={() => this.startSample("BD")}>BD</Button>
                             <Button onClick={() => this.startSample("SN")}>SN</Button>
-                            <Button onClick={() => this.startSample("RT")}>RT</Button>
+                            <Button onClick={() => this.startSample("CP")}>CP</Button>
                             <Button onClick={() => this.startSample("HH")}>HH</Button>
                         </div>
                     </Col>
