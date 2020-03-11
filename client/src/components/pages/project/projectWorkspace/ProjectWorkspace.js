@@ -35,10 +35,6 @@ class Project extends Component {
         }
     }
 
-    componentDidMount = () => {
-        console.log(this.props)
-    }
-
     // Wave type selector updates 'wave' property in state
     onChange = event => {
         const { name, value } = event.target
