@@ -25,8 +25,11 @@ class ProjectCard extends Component {
         this.services = new AuthServices()
     }
 
+    componentDidMount = () => { console.log(this.props.loggedInUser._id, this.props._id) }
+
     closeModal = () => this.setState({ showmodal: false })
     openModal = () => this.setState({ showmodal: true })
+    //queEsProps = () => console.log(this.props)
 
     render() {
         return (
@@ -39,7 +42,7 @@ class ProjectCard extends Component {
                         {this.props.loggedInUser ?
                             <>
                                 <Button as="div" className="mb-20" variant="dark" size="sm">
-                                    <Link to={`/details/${this.props._id}`}>Details</Link>
+                                    <Link to={`/details/${this.props._id}`} projectId={this.props._id} userId={this.props.loggedInUser._id}>Details</Link>
                                 </Button>
                             </>
                             :

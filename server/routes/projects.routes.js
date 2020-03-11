@@ -22,10 +22,11 @@ router.post('/new', (req, res, next) => {
 })
 
 router.put('/save/:id', (req, res, next) => {
-    Project.findByIdAndUpdate(req.params.id, { $set: { title: 'jason bourne' } }, { new: true, upsert: true })
+    console.log(req.body)
+    Project.wherefindByIdAndUpdate(req.params.id, req.body, { new: true, upsert: true })
+        .then(theProject => console.log('editing Project', theProject))
         .then(theProject => { res.json(theProject) })
         .catch(err => console.log(err))
 })
-
 
 module.exports = router

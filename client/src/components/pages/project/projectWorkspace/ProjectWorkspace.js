@@ -14,10 +14,11 @@ import Row from 'react-bootstrap/Row'
 
 class Project extends Component {
 
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.projectServices = new ProjectsServices()
         this.state = {
+            user: {},
             bpm: 120,
             step: 1,
             attack: 0,
@@ -29,6 +30,10 @@ class Project extends Component {
             selectedResolution: 15,
             dmSeq: []
         }
+    }
+
+    componentDidMount = () => {
+        console.log(this.props)
     }
 
     // Wave type selector updates 'wave' property in state
@@ -66,10 +71,14 @@ class Project extends Component {
     }
 
     saveProject = () => {
-        this.projectServices.saveProject(this.state)
-            .then(() => console.log(this.state))
+        // console.log(this.props)
+        this.projectServices.saveProject(this.props.id, this.state)
+            .then(theProject => console.log(theProject))
+            .then(() => alert('éxito'))
             .catch(err => console.log(err))
     }
+
+    queEsProps = () => console.log(this.props)
 
     render() {
         return (
@@ -90,7 +99,7 @@ class Project extends Component {
                             onChange={this.onChange} />
                     </Col>
                     <Col md={4}>
-                        <Button className="transport m-10" variant="light" type="submit" onClick={this.saveProject()}>Save Changes</Button>
+                        <Button className="transport m-10" variant="light" type="submit" id={this.props.id} onClick={this.queEsProps}>Save Changes</Button>
                     </Col>
                 </Row>
                 <hr />
