@@ -13,7 +13,7 @@ import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 
 /* --- react-router-dom import --- */
-import { BrowserRouter as Router, Link, Route } from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router-dom'
 
 class Project extends Component {
 
@@ -75,11 +75,14 @@ class Project extends Component {
 
     saveProject = () => {
         this.projectServices.saveProject(this.props.projectId, this.state)
-            .then(theProject => console.log('put', theProject))
+            .then(() => console.log(this.state))
             .catch(err => console.log(err))
     }
 
-    queEsProps = () => console.log(this.props)
+    handleSubmit = e => {
+        e.preventDefault()
+        this.saveProject()
+    }
 
     render() {
         return (
@@ -100,7 +103,7 @@ class Project extends Component {
                             onChange={this.onChange} />
                     </Col>
                     <Col md={4}>
-                        <Button className="transport m-10" variant="light" type="submit" id={this.props.id} onClick={this.saveProject}>Save Changes</Button>
+                        <Button className="transport m-10" variant="light" type="submit" id={this.props.id} onClick={this.saveProject} user={this.props.userId}>Save Changes</Button>
                     </Col>
                 </Row>
                 <hr />
