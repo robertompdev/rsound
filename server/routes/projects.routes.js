@@ -23,14 +23,13 @@ router.post('/new', (req, res, next) => {
 
 //el servicio esta llamando a /save/:id no a /save/:id/:user
 router.put('/save/:id', (req, res, next) => {
-    Project.findByIdAndUpdate(req.params.id, { $set: { title: 'commit' } }, { new: true }, function (err, project) {
-        console.log(req.body)
+    Project.findByIdAndUpdate(req.params.id, { $set: { title: 'tt' } }, { new: true }, function (err, project) {
         if (err) return handleError(err);
-        res.send(tank)
+        res.send(project)
     })
-        .then(theProject => console.log('editing Project', theProject))
-        .then(theProject => { res.json(theProject) })
-        .catch(err => console.log(err))
+    // .then(theProject => console.log('editing Project', theProject))
+    // .then(theProject => { res.json(theProject) })
+    // .catch(err => console.log(err))
 })
 
 module.exports = router
