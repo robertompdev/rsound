@@ -41,6 +41,7 @@ class ProjectCard extends Component {
                     <Card.Img variant="top" src={this.props.imageUrl} />
                     <Card.Body>
                         <Card.Title>{this.props.title}</Card.Title>
+                        <p>{this.props.description}</p>
                         <hr></hr>
                         {this.props.loggedInUser ?
                             <>
@@ -50,7 +51,7 @@ class ProjectCard extends Component {
                                         render={props => {
                                             return <ProjectDetails {...props} />;
                                         }}
-                                    >Details</Link>
+                                    >Open</Link>
                                 </Button>
                             </>
                             :
