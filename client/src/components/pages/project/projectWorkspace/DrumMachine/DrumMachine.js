@@ -43,14 +43,15 @@ class DrumMachine extends Component {
     // Plays the note stored in the index array
     playSequence() {
         let currentStepSouds = this.state.dmSeq[this.state.step]
-        this.setState({ step: this.state.step + 1 })
-        this.state.step === 15 && this.setStepToZero()
-        if (currentStepSouds !== "") {
-            currentStepSouds.includes("BD") && this.startSample("BD")
-            currentStepSouds.includes("SN") && this.startSample("SN")
-            currentStepSouds.includes("HH") && this.startSample("HH")
-            currentStepSouds.includes("CP") && this.startSample("CP")
-        }
+        this.setState({ step: this.state.step + 1 }, () => {
+            this.state.step === 16 && this.setStepToZero()
+            if (currentStepSouds !== "") {
+                currentStepSouds.includes("BD") && this.startSample("BD")
+                currentStepSouds.includes("SN") && this.startSample("SN")
+                currentStepSouds.includes("HH") && this.startSample("HH")
+                currentStepSouds.includes("CP") && this.startSample("CP")
+            }
+        })
     }
 
     startSample(sample) {
@@ -92,11 +93,11 @@ class DrumMachine extends Component {
         newSequence[stepNumber].push(selectedKey)
 
         if (selectedCell.className.includes('elected')) {
-            console.log(selectedKey)
             newSequence[stepNumber] = [...newSequence[stepNumber].filter(e => e !== selectedKey)]
+            console.log('si tiene elected la tiene que borrar', selectedKey)
+            console.log(newSequence[stepNumber])
             selectedCell.className = `drum-note ${stepNumber + 1}`
             selectedCell.style.background = "#FFE4D3"
-            console.log(newSequence[stepNumber])
         } else {
             newSequence[stepNumber] = selectedKey
             selectedCell.className = `drum-note ${stepNumber + 1} elected`
@@ -111,8 +112,8 @@ class DrumMachine extends Component {
                 case "CP":
                     this.startSample("CP")
                     break;
-                case "DB":
-                    this.startSample("DB")
+                case "BD":
+                    this.startSample("BD")
                     break;
                 default:
                     break;
