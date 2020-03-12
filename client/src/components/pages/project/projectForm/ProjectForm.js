@@ -8,6 +8,8 @@ import FilesServices from '../../../../services/files.services'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
+import mongoose from 'mongoose'
+
 class ProjectForm extends Component {
 
     constructor(props) {
@@ -19,9 +21,16 @@ class ProjectForm extends Component {
                 title: '',
                 description: '',
                 parameters: '',
-                imageUrl: ''
+                imageUrl: '',
+                autor: mongoose.Types.ObjectId(),
             }
         }
+    }
+
+    componentDidMount() {
+        // console.log(this.props.userId)
+
+        this.setState({ autor: mongoose.Types.ObjectId(this.props.userId) })
     }
 
     finishAction = () => {

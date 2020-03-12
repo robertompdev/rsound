@@ -5,6 +5,7 @@ const Project = require('../models/Project.model')
 
 router.get('/getAllProjects', (req, res, next) => {
     Project.find()
+        .populate('autor')
         .then(allProjects => res.json(allProjects))
         .catch(err => console.log(err))
 })

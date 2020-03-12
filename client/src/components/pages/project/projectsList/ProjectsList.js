@@ -65,7 +65,7 @@ class ProjectsList extends Component {
                     <Modal.Body>
                         <h3 className="orange-text">New project</h3>
                         <hr></hr>
-                        <ProjectForm closeModal={this.closeModal} refreshList={this.getAllProjects} />
+                        <ProjectForm closeModal={this.closeModal} refreshList={this.getAllProjects} userId={this.props.loggedInUser._id} />
                     </Modal.Body>
                 </Modal>
             </Container>
