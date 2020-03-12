@@ -86,22 +86,26 @@ class DrumMachine extends Component {
         e = e.target || e.srcElement
 
         let newSequence = [...this.state.dmSeq]
+
         let stepNumber = parseInt(e.id.slice(-2)) - 1
         let selectedKey = e.id.split('0')[0]
         let selectedCell = document.getElementById(e.id)
 
-        newSequence[stepNumber].push(selectedKey)
+
+        let stepArr = newSequence[stepNumber]
+        console.log(stepArr)
 
         if (selectedCell.className.includes('elected')) {
             newSequence[stepNumber] = [...newSequence[stepNumber].filter(e => e !== selectedKey)]
-            console.log('si tiene elected la tiene que borrar', selectedKey)
-            console.log(newSequence[stepNumber])
+            // console.log(newSequence[stepNumber])
+            // newSequence[stepNumber] = newSequence[stepNumber].indexOf(selectedKey)
             selectedCell.className = `drum-note ${stepNumber + 1}`
             selectedCell.style.background = "#FFE4D3"
         } else {
-            newSequence[stepNumber] = selectedKey
+            newSequence[stepNumber].push(selectedKey)
             selectedCell.className = `drum-note ${stepNumber + 1} elected`
             selectedCell.style.background = "#F16B24"
+
             switch (selectedKey) {
                 case "HH":
                     this.startSample("HH")
@@ -119,7 +123,9 @@ class DrumMachine extends Component {
                     break;
             }
         }
-        this.setState({ sequence: newSequence })
+
+        this.setState({ dmSeq: newSequence })
+        console.log(this.state.dmSeq)
     }
 
     render() {
