@@ -5,6 +5,7 @@ const projectSchema = new Schema({
     title: String,
     description: String,
     bpm: { type: Number, default: 120 },
+    step: Number,
     attack: { type: Number, default: 0 },
     decay: { type: Number, default: 1 },
     release: { type: Number, default: 0.15 },

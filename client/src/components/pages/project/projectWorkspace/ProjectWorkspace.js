@@ -21,7 +21,8 @@ class Project extends Component {
         super(props)
         this.projectServices = new ProjectsServices()
         this.state = {
-            user: {},
+            title: 'Ay',
+            description: 'YAYAYA',
             bpm: 120,
             step: 1,
             attack: 0,
@@ -31,7 +32,9 @@ class Project extends Component {
             sustain: 0.05,
             wave: 'sawtooth',
             selectedResolution: 15,
-            dmSeq: []
+            dmSeq: [],
+            imageUrl: 'https://res.cloudinary.com/dnzarhjsc/image/upload/v1583069489/projects/msource.jpg.jpg',
+
         }
     }
 
@@ -71,7 +74,7 @@ class Project extends Component {
 
     saveProject = () => {
         this.projectServices.saveProject(this.props.projectId, this.state)
-            .then(() => console.log(this.state))
+            .then(() => console.log('hey'))
             .catch(err => console.log(err))
     }
 
