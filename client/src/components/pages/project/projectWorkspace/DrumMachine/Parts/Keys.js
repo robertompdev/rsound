@@ -7,7 +7,7 @@ class Key extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            notes: ["RT", "HH", "SN", "BD"]
+            notes: ["CP", "HH", "SN", "BD"]
         }
     }
 
