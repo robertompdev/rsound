@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 /* --- styling import --- */
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
+import Button from 'react-bootstrap/Button'
 import './Synth.css'
 
 /* --- json data import --- */
@@ -127,16 +128,15 @@ class Synth extends Component {
                 if (selectedCell) { selectedCell.style.background = "#F16B24" }
 
             }
-
-            //     if (parseInt(elm.id.slice(-2)) - 1) === this.stepNumber) {
-            //     //console.log('yaiiiii')
-            // }
         })
-
     }
 
-
-
+    clearAllSynth() {
+        let allStepHeaders = document.getElementsByClassName("step-header")
+        let restOfKeys = document.getElementsByClassName('key-note')
+        for (let i = 0; i < allStepHeaders.length; i++) { allStepHeaders[i].style.backgroundColor = "#555B6E" }
+        for (let i = 0; i < restOfKeys.length; i++) { restOfKeys[i].style.backgroundColor = "#FFE4D3" }
+    }
 
     render() {
         let handleToUpdateSynth = this.props.handleToUpdateSynth
@@ -147,6 +147,7 @@ class Synth extends Component {
                     <Col md={12}>
                         <h4>Pattern Sequencer</h4>
                     </Col>
+
                     <div className="div-seq">
                         <MSC className="text-center" matrixCellOnClick={() => {
                             this.matrixCellOnClick()
@@ -192,6 +193,7 @@ class Synth extends Component {
                             <option value="3.75" >1/32</option>
                             <option value="1.875" >1/64</option>
                         </select>
+                        <Button variant='light' onClick={() => this.clearAllSynth()}>Clear Synth Notes</Button>
                     </Col>
                     <hr />
                 </Row>

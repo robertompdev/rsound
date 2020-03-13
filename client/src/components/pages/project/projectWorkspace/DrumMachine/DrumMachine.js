@@ -128,6 +128,13 @@ class DrumMachine extends Component {
         console.log(this.state.dmSeq)
     }
 
+    clearAllDrumMachine() {
+        let allStepHeaders = document.getElementsByClassName('step-header')
+        let restOfKeys = document.getElementsByClassName('drum-note')
+        for (let i = 0; i < allStepHeaders.length; i++) { allStepHeaders[i].style.backgroundColor = "#555B6E" }
+        for (let i = 0; i < restOfKeys.length; i++) { restOfKeys[i].style.backgroundColor = "#FFE4D3" }
+    }
+
     render() {
         let handleToUpdateDM = this.props.handleToUpdateDM
         return (
@@ -148,14 +155,18 @@ class DrumMachine extends Component {
                             handleToUpdateDM(this.state.dmSeq)
                         }} />
                     </div>
-
                 </Row>
                 <Row>
-                    <Col md={2}>
+                    <Col md={4}>
                         {/* VOLUME CONTROL */}
                         <h4>Volume {Number.parseInt(this.state.volume * 100)}</h4>
                         <input name="volume" className="volume-slider" type="range" min="0" max="1" step="0.01" defaultValue={this.state.volume}
                             onChange={this.onChange} />
+                    </Col>
+                    <Col md={4}>
+                    </Col>
+                    <Col md={4}>
+                        <Button variant='light' onClick={() => this.clearAllDrumMachine()}>Clear Synth Notes</Button>
                     </Col>
                 </Row>
             </>

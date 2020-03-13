@@ -25,7 +25,7 @@ class MSC extends Component {
                         <div className="step-header">
                             Notes
                         </div>
-                        {this.state.numberOfSteps.map((step, idx) => <div className="step-header" id={`step-header ${step}`} key={idx}>{step}</div>)}
+                        {this.state.numberOfSteps.map((step, idx) => <div className={`step-header ${step}`} id={`step-header ${step}`} key={idx}>{step}</div>)}
                     </Row>
                     <Row className="div-seq no-gutters text-center">
                         <div className="step-header">
