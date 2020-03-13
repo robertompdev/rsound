@@ -32,6 +32,19 @@ class Synth extends Component {
         }
     }
 
+    componentDidMount() {
+
+        this.setState({ sequence: this.props.sequence, wave: this.props.wave, selectedResolution: this.props.selectedResolution })
+        document.addEventListener("keydown", this.handleKeyDown, false)
+        this.colorNotesSavedInProject()
+    }
+
+    colorNotesSavedInProject() {
+        this.state.sequence.forEach(elem =>
+            console.log(elem))
+        //document.getElementsByClassName(elem).style..background = "#F16B24")
+    }
+
     // If parent matrix step property updates, then it plays next note from the sequence in the array
     componentDidUpdate(prevProps) {
         if (prevProps.playStep !== this.props.playStep) {
@@ -82,6 +95,13 @@ class Synth extends Component {
     // Note resolution type selector updates 'selectedResolution' property in state
     handleResolutionChanged = (e) => {
         this.setState({ selectedResolution: e.target.value })
+    }
+
+    handleKeyDown(event) {
+        if (event.keyCode === 65) {
+            console.log('esta es la A')
+            //this.startOsc('C1')
+        }
     }
 
     onChange = event => {
@@ -150,10 +170,11 @@ class Synth extends Component {
                     <div className="div-seq">
                         <MSC className="text-center" matrixCellOnClick={() => {
                             this.matrixCellOnClick()
-                            handleToUpdateSynth(this.state.sequence, this.state.release, this.state.sustain, this.state.wave, this.state.selectedResolution)
+                            handleToUpdateSynth(this.state.sequence, this.state.wave, this.state.selectedResolution)
                         }
                         } />
                     </div>
+                    {/* // <input type="text" onKeyDown={this.handleKeyDown} /> */}
                     <hr />
                 </Row>
                 <Row className="text-center ">
