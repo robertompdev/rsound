@@ -22,7 +22,8 @@ router.post('/new', (req, res, next) => {
         .catch(err => console.log(err))
 })
 
-router.put('/save/:id/:userid', (req, res, next) => {
+router.put('/save/:id', (req, res, next) => {
+    console.log(req.body)
     Project.findByIdAndUpdate(req.params.id, req.body, { new: true })
         .then(() => res.redirect(`/`))
         .catch(err => next(new Error(err)))

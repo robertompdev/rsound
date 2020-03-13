@@ -32,6 +32,16 @@ class Synth extends Component {
         }
     }
 
+    // If parent matrix step property updates, then it plays next note from the sequence in the array
+    componentDidUpdate(prevProps) {
+        if (prevProps.playStep !== this.props.playStep) {
+            if (this.props.playStep % parseInt(this.state.selectedResolution) === 0) {
+                this.playSequence()
+            }
+        }
+        this.colorCurrentStep()
+    }
+
     // Audio Node
     startOsc = (freq) => {
         let osc = Audio.context.createOscillator()
@@ -52,16 +62,6 @@ class Synth extends Component {
         // Connect the Nodes
         osc.connect(gain) // Connect oscillator to gain
         gain.connect(Audio.context.destination) // Connect gain to output
-    }
-
-    // If parent matrix step property updates, then it plays next note from the sequence in the array
-    componentDidUpdate(prevProps) {
-        if (prevProps.playStep !== this.props.playStep) {
-            if (this.props.playStep % parseInt(this.state.selectedResolution) === 0) {
-                this.playSequence()
-            }
-        }
-        this.colorCurrentStep()
     }
 
     // Reset sequence to step index zero 
@@ -123,7 +123,6 @@ class Synth extends Component {
 
             if (parseInt(elm.id.slice(-2)) - 1 === this.state.step) {
                 let selectedCell = document.getElementById(`step-header ${this.state.step}`)
-                console.log(selectedCell)
                 for (let i = 0; i < allStepHeaders.length; i++) { allStepHeaders[i].style.backgroundColor = "#555B6E" }
                 if (selectedCell) { selectedCell.style.background = "#F16B24" }
 

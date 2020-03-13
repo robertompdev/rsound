@@ -22,7 +22,7 @@ class Project extends Component {
         super(props)
         this.projectServices = new ProjectsServices()
         this.state = {
-            title: 'Ay',
+            title: 'Por',
             description: 'YAYAYA',
             bpm: 120,
             step: 1,
@@ -37,6 +37,10 @@ class Project extends Component {
             imageUrl: 'https://res.cloudinary.com/dnzarhjsc/image/upload/v1583069489/projects/msource.jpg.jpg',
 
         }
+    }
+
+    componentDidMount() {
+        this.setState({ title: this.props.title, description: this.props.description })
     }
 
     // Wave type selector updates 'wave' property in state
