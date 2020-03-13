@@ -60,6 +60,7 @@ class Synth extends Component {
                 this.playSequence()
             }
         }
+        this.colorCurrentStep()
     }
 
     // Reset sequence to step index zero 
@@ -113,17 +114,41 @@ class Synth extends Component {
         this.setState({ sequence: newSequence })
     }
 
+    colorCurrentStep() {
+        let allStepHeaders = document.getElementsByClassName("step-header")
+        allStepHeaders = [...allStepHeaders]
+
+        allStepHeaders.forEach(elm => {
+
+            if (parseInt(elm.id.slice(-2)) - 1 === this.state.step) {
+                let selectedCell = document.getElementById(`step-header ${this.state.step}`)
+                console.log(selectedCell)
+                for (let i = 0; i < allStepHeaders.length; i++) { allStepHeaders[i].style.backgroundColor = "#555B6E" }
+                if (selectedCell) { selectedCell.style.background = "#F16B24" }
+
+            }
+
+            //     if (parseInt(elm.id.slice(-2)) - 1) === this.stepNumber) {
+            //     //console.log('yaiiiii')
+            // }
+        })
+
+    }
+
+
+
+
     render() {
         let handleToUpdateSynth = this.props.handleToUpdateSynth
         return (
             <>
-                <Row>
+                <Row className="mb-20">
                     {/* MATRIX STEP SEQUENCER */}
                     <Col md={12}>
                         <h4>Pattern Sequencer</h4>
                     </Col>
                     <div className="div-seq">
-                        <MSC matrixCellOnClick={() => {
+                        <MSC className="text-center" matrixCellOnClick={() => {
                             this.matrixCellOnClick()
                             handleToUpdateSynth(this.state.sequence, this.state.release, this.state.sustain, this.state.wave, this.state.selectedResolution)
                         }
@@ -131,8 +156,8 @@ class Synth extends Component {
                     </div>
                     <hr />
                 </Row>
-                <Row>
-                    <Col md={2}>
+                <Row className="text-center ">
+                    <Col md={4} className="text-center">
                         {/* WAVE TYPE SELECTOR */}
                         <h4>Wave Type</h4>
                         <select className="form-control" onChange={this.handleSelectionChanged} defaultValue={this.state.wave}>
@@ -146,7 +171,7 @@ class Synth extends Component {
                         <input name="volume" className="volume-slider" type="range" min="0" max="1" step="0.01" defaultValue={this.state.volume}
                             onChange={this.onChange} />
                     </Col>
-                    <Col md={2}>
+                    <Col md={4} className="text-center">
                         {/* CONTROLES ADSR */}
                         <h4>Envelope</h4>
                         <p>Sustain {Number.parseInt(this.state.sustain * 100)}</p>
@@ -156,7 +181,7 @@ class Synth extends Component {
                         <input name="release" className="release-slider" type="range" min="0" max="0.3" step="0.01" defaultValue={this.state.release}
                             onChange={this.onChange} />
                     </Col>
-                    <Col md={2}>
+                    <Col md={4} className="text-center">
                         <h4>Step Length</h4>
                         <select className="form-control" onChange={this.handleResolutionChanged} defaultValue="15">
                             <option value="120" >1/1</option>

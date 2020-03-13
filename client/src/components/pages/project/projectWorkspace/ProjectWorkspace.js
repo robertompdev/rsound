@@ -11,6 +11,7 @@ import DrumMachine from './DrumMachine/DrumMachine'
 import Button from 'react-bootstrap/Button'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
+import Container from 'react-bootstrap/Container'
 
 /* --- react-router-dom import --- */
 import { BrowserRouter as Router } from 'react-router-dom'
@@ -86,31 +87,33 @@ class Project extends Component {
     render() {
         return (
             <Router>
-                <Row>
-                    <Col md={12}>
-                        <h2>Transport</h2>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col md={4}>
-                        <Button className="transport m-10" variant="light" type="submit" onClick={() => this.playSeq()} >Play</Button>
-                        <Button className="transport m-10" variant="light" type="submit" onClick={() => this.stopSeq()} >Stop</Button>
-                    </Col >
-                    <Col md={4}>
-                        <h4>Tempo {this.state.bpm} BPM's</h4>
-                        <input name="bpm" className="bpm-slider m-10" type="range" min="50" max="240" step="1" defaultValue={this.state.bpm}
-                            onChange={this.onChange} />
-                    </Col>
-                    <Col md={4}>
-                        <Button className="transport m-10" variant="light" type="submit" id={this.props.id} onClick={this.saveProject} user={this.props.userId}>Save Changes</Button>
-                    </Col>
-                </Row>
-                <hr />
-                <h3>Synth A</h3>
-                <Synth className="md-10" playStep={this.state.step} bpm={this.state.bpm} handleToUpdateSynth={this.handleToUpdateSynth} />
-                <hr />
-                <h3>Drum Machine</h3>
-                <DrumMachine playStep={this.state.step} bpm={this.state.bpm} handleToUpdateDM={this.handleToUpdateDM} />
+                <Container className="text-center">
+                    <Row>
+                        <Col md={12}>
+                            <h2>Transport</h2>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col md={4} className="text-center">
+                            <Button className="transport m-10" variant="light" type="submit" onClick={() => this.playSeq()} >Play</Button>
+                            <Button className="transport m-10" variant="light" type="submit" onClick={() => this.stopSeq()} >Stop</Button>
+                        </Col >
+                        <Col md={4} className="text-center">
+                            <h4>Tempo {this.state.bpm} BPM's</h4>
+                            <input name="bpm" className="bpm-slider m-10" type="range" min="50" max="240" step="1" defaultValue={this.state.bpm}
+                                onChange={this.onChange} />
+                        </Col>
+                        <Col md={4} className="text-center">
+                            <Button className="transport m-10" variant="light" type="submit" id={this.props.id} onClick={this.saveProject} user={this.props.userId}>Save Changes</Button>
+                        </Col>
+                    </Row >
+                    <hr />
+                    <h3>Synth A</h3>
+                    <Synth className="md-10 mb-20" playStep={this.state.step} bpm={this.state.bpm} handleToUpdateSynth={this.handleToUpdateSynth} />
+                    <hr />
+                    <h3>Drum Machine</h3>
+                    <DrumMachine playStep={this.state.step} bpm={this.state.bpm} handleToUpdateDM={this.handleToUpdateDM} />
+                </Container>
             </Router>
         )
     }
