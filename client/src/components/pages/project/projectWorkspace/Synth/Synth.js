@@ -63,7 +63,7 @@ class Synth extends Component {
         // Create OscillatorNode
         osc = Audio.context.createOscillator() // Create sound source
         osc.type = this.state.wave
-        osc.frequency.value = freq // Frequency in hertz (passed from input button)
+        freq ? osc.frequency.value = freq : osc.frequency.value = 0 // Frequency in hertz (passed from input button)
         osc.start(0) // Play oscillator instantly
 
         // Create GainNode	
