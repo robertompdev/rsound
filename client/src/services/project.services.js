@@ -13,4 +13,5 @@ export default class Services {
     getProjectsDetails = (id, userId) => this.service.get(`/getOneProject/${id}/${userId}`).then(response => response.data)
     postProject = project => this.service.post(`/new`, project).then(response => response.data)
     saveProject = (id, project) => this.service.put(`/save/${id}`, project).then(response => response.data)
+    deleteProject = (id, project) => this.service.delete(`/delete/${id}`, project).then(response => response.data)
 }

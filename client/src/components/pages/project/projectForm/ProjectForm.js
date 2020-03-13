@@ -85,7 +85,7 @@ class ProjectForm extends Component {
                     <Form.Control type="file" name="imageUrl" onChange={this.handleFileUpload} />
                     {/* <Form.Control type="text" name="imageUrl" value={this.state.project.imageUrl} onChange={this.handleChange} /> */}
                 </Form.Group>
-                <Button variant="dark" type="submit">Create new project</Button>
+                <Button variant="light" type="submit">Create new project</Button>
             </Form>
         )
     }

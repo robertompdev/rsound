@@ -79,7 +79,13 @@ class Project extends Component {
 
     saveProject = () => {
         this.projectServices.saveProject(this.props.projectId, this.state)
-            .then(() => console.log('hey'))
+            .then(() => console.log('saved'))
+            .catch(err => console.log(err))
+    }
+
+    deleteProject = () => {
+        this.projectServices.deleteProject(this.props.projectId)
+            .then(() => console.log('delete'))
             .catch(err => console.log(err))
     }
 
@@ -109,6 +115,7 @@ class Project extends Component {
                         </Col>
                         <Col md={4} className="text-center">
                             <Button className="transport m-10" variant="light" type="submit" id={this.props.id} onClick={this.saveProject} user={this.props.userId}>Save Changes</Button>
+                            <Button className="transport m-10" variant="light" type="submit" id={this.props.id} onClick={this.deleteProject} user={this.props.userId}>Delete Project</Button>
                         </Col>
                     </Row >
                     <hr />

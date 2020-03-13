@@ -29,4 +29,10 @@ router.put('/save/:id', (req, res, next) => {
         .catch(err => next(new Error(err)))
 })
 
+router.get('/delete/:id', (req, res, next) => {
+    Project.findByIdAndDelete(req.param.id)
+        .then(() => res.redirect('/'))
+        .catch(err => next(new Error(err)))
+})
+
 module.exports = router

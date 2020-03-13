@@ -45,7 +45,7 @@ class ProjectCard extends Component {
                         <hr></hr>
                         {this.props.loggedInUser ?
                             <>
-                                <Button as="div" className="mb-20" variant="dark" size="sm">
+                                <Button as="div" className="mb-20" variant="light" size="sm">
                                     <Link
                                         to={{ pathname: `/details/${this.state.projectId}/${this.state.userId}`, state: { projectId: this.state.projectId, userId: this.state.userId } }}
                                         render={props => {
@@ -56,7 +56,7 @@ class ProjectCard extends Component {
                             </>
                             :
                             <>
-                                {!this.props.loggedInUser && <Button className="mb-20" variant="dark" onClick={this.openModal}>Details</Button>}
+                                {!this.props.loggedInUser && <Button className="mb-20" variant="light" onClick={this.openModal}>Details</Button>}
                             </>}
                     </Card.Body>
                 </Card>
@@ -67,12 +67,12 @@ class ProjectCard extends Component {
                         <hr />
                         <Row>
                             <Col md={3}>
-                                <Button as="div" className="mb-20" variant="dark" size="sm">
+                                <Button as="div" className="mb-20" variant="light" size="sm">
                                     <Link to="/signup">SignUp</Link>
                                 </Button>
                             </Col>
                             <Col md={3}>
-                                <Button as="div" className="mb-20" variant="dark" size="sm">
+                                <Button as="div" className="mb-20" variant="light" size="sm">
                                     <Link to="/login">LogIn</Link>
                                 </Button>
                             </Col>

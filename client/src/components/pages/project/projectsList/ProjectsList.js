@@ -46,7 +46,7 @@ class ProjectsList extends Component {
                 <h1>Projects</h1>
                 <Row>
                     <Col>
-                        {this.props.loggedInUser && <Button className="mb-20" variant="dark" onClick={this.openModal}>Create project</Button>}
+                        {this.props.loggedInUser && <Button className="mb-20" variant="light" onClick={this.openModal}>Create project</Button>}
                     </Col>
                 </Row>
                 <Row>
